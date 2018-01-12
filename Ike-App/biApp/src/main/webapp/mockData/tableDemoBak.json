@@ -1,0 +1,59 @@
+
+
+
+{
+    "success": true,
+    "message": null,
+    "data": {
+        "pageSize": 15,
+        "rows": [{
+        	"id":1,
+			"Name":"ff1",
+			"ParentName":"ff2",
+			"Level":"ff3",
+			"Desc":"ff4"
+			},
+			{
+			"id":2,
+			"Name":"ff1",
+			"ParentName":"ff2",
+			"Level":"ff3",
+			"Desc":"ff4"
+			},
+			{
+			"id":3,
+			"Name":"ff1",
+			"ParentName":"ff2",
+			"Level":"ff3",
+			"Desc":"ff4"
+			}],
+        "total": 3,
+        "rows": [{
+        	"id":1,
+			"Name":"ff1",
+			"ParentName":"ff2",
+			"Level":"ff3",
+			"Desc":"ff4"
+			},
+			{
+			"id":2,
+			"Name":"ff1",
+			"ParentName":"ff2",
+			"Level":"ff3",
+			"Desc":"ff4"
+			},
+			{
+			"id":3,
+			"Name":"ff1",
+			"ParentName":"ff2",
+			"Level":"ff3",
+			"Desc":"ff4"
+			}],
+        "totalPage": 1,
+        "page": 0,
+        "hasPreviousPage": false,
+        "hasNextPage": false,
+        "lastPage": false,
+        "firstPage": false
+    }
+}

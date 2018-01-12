@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.Ike.Core.points.mapper.MapPointsMapper" >
+  <resultMap id="BaseResultMap" type="org.Ike.Api.points.model.MapPoints" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="LNG" property="lng" jdbcType="DECIMAL" />
+    <result column="LAT" property="lat" jdbcType="DECIMAL" />
+    <result column="TYPE_ST" property="typeSt" jdbcType="VARCHAR" />
+    <result column="MAP_ORDER" property="mapOrder" jdbcType="INTEGER" />
+    <result column="SYS_CREATE_DATE" property="sysCreateDate" jdbcType="DATE" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="DISABLED" property="disabled" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, LNG, LAT, TYPE_ST, MAP_ORDER, SYS_CREATE_DATE, VERSION, DISABLED
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from IKE_MAP_POINTS
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="org.Ike.Api.points.model.MapPoints" useGeneratedKeys="true" keyProperty="id">
+    insert into IKE_MAP_POINTS (LNG, LAT,
+      TYPE_ST, MAP_ORDER, SYS_CREATE_DATE, 
+      VERSION, DISABLED)
+    values (#{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL},
+      #{typeSt,jdbcType=VARCHAR}, #{mapOrder,jdbcType=INTEGER}, #{sysCreateDate,jdbcType=DATE}, 
+      #{version,jdbcType=INTEGER}, #{disabled,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.Ike.Api.points.model.MapPoints" >
+    insert into IKE_MAP_POINTS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="lng != null" >
+        LNG,
+      </if>
+      <if test="lat != null" >
+        LAT,
+      </if>
+      <if test="typeSt != null" >
+        TYPE_ST,
+      </if>
+      <if test="mapOrder != null" >
+        MAP_ORDER,
+      </if>
+      <if test="sysCreateDate != null" >
+        SYS_CREATE_DATE,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="disabled != null" >
+        DISABLED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="typeSt != null" >
+        #{typeSt,jdbcType=VARCHAR},
+      </if>
+      <if test="mapOrder != null" >
+        #{mapOrder,jdbcType=INTEGER},
+      </if>
+      <if test="sysCreateDate != null" >
+        #{sysCreateDate,jdbcType=DATE},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="disabled != null" >
+        #{disabled,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.Ike.Api.points.model.MapPoints" >
+    update IKE_MAP_POINTS
+    <set >
+      <if test="lng != null" >
+        LNG = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null" >
+        LAT = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="typeSt != null" >
+        TYPE_ST = #{typeSt,jdbcType=VARCHAR},
+      </if>
+      <if test="mapOrder != null" >
+        MAP_ORDER = #{mapOrder,jdbcType=INTEGER},
+      </if>
+      <if test="sysCreateDate != null" >
+        SYS_CREATE_DATE = #{sysCreateDate,jdbcType=DATE},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="disabled != null" >
+        DISABLED = #{disabled,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.Ike.Api.points.model.MapPoints" >
+    update IKE_MAP_POINTS
+    set LNG = #{lng,jdbcType=DECIMAL},
+      LAT = #{lat,jdbcType=DECIMAL},
+      TYPE_ST = #{typeSt,jdbcType=VARCHAR},
+      MAP_ORDER = #{mapOrder,jdbcType=INTEGER},
+      SYS_CREATE_DATE = #{sysCreateDate,jdbcType=DATE},
+      VERSION = #{version,jdbcType=INTEGER},
+      DISABLED = #{disabled,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

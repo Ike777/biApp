@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="">
+	
+	
+	<script src="/biApp/views/maps/map1.js"></script>
+	
+	
+	<style type="text/css">
+		body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#allmap{width:70%;height:700px;margin-left:400px;margin-top:-520px;}
+		p{margin-left:5px; font-size:14px;}
+		
+		.restaurant1 {
+		    background-position: -291px 0;
+		}
+		
+		.itemListCss{
+			margin-left:400px;
+			padding-top:10px;
+		}
+		
+		.addWidth{
+			width:80% !important;
+		}
+		
+		.searchGroupCss{
+			width:350px;
+			margin-top:10px;
+			margin-left:10px;
+		}
+		
+		.marginTop{
+			margin-top:10px;
+		}
+		
+	</style>
+	
+	<title>地图样例1</title>
+</head>
+<body>
+	
+	<div id="searchGroup" class="searchGroupCss">
+		<div class="panel panel-default" style="height:500px;">
+		  <div class="panel-heading">搜索</div>
+		  <div class="panel-body">
+		    <div class="row marginTop" >
+			  <div class="col-lg-12">
+			    <div class="input-group">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">搜索</button>
+			      </span>
+			      <input type="text" class="form-control" placeholder="店名...">
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-12 -->
+			 </div>
+			 
+			 <div class="row marginTop">
+			  <div class="col-lg-12">
+			    <div class="input-group">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">搜索</button>
+			      </span>
+			      <input type="text" class="form-control" placeholder="店名...">
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-12 -->
+			 </div>
+			 
+			 <div class="row marginTop">
+			  <div class="col-lg-12">
+			    <div class="input-group">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">搜索</button>
+			      </span>
+			      <input type="text" class="form-control" placeholder="店名...">
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-12 -->
+			 </div>
+		  </div>
+		</div>
+	
+		
+	</div>
+
+	<div id="allmap" style=""></div>
+	
+	<div id="itemList" class="itemListCss">
+		<span class="label label-primary">周边信息</span>
+		<span class="label label-primary">区域信息</span>
+	</div>
+	
+	<div style="margin-left:400px;padding-top:10px;">
+	<div class="list-group">
+	  <a href="#" class="list-group-item list-group-item-info" style="width:80%;margin-top:10px;">一号店-上海市黄浦区蒙自路75号</a>
+	  <a href="#" class="list-group-item list-group-item-info" style="width:80%;margin-top:10px;">海淘店-上海市徐汇区蒙自路79号</a>
+	  <a href="#" class="list-group-item list-group-item-info" style="width:80%;margin-top:10px;">
+	  	<span class="glyphicon  glyphicon-star" aria-hidden="true"></span>
+	  	<span class="glyphicon  glyphicon-star" aria-hidden="true"></span>
+	  	<h4 class="list-group-item-heading">淮海路店</h4>
+	  	<p class="list-group-item-text">价格 xxx  排行 x 电话：xxxxx 负责人：xxx</p>
+	  </a>
+	</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+		// 百度地图API功能
+		var map = new BMap.Map("allmap");
+		map.addControl(new BMap.NavigationControl());// 添加平移缩放控件
+		map.addControl(new BMap.ScaleControl()); // 添加比例尺控件
+		map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
+		map.enableScrollWheelZoom();   //启用滚轮放大缩小
+		map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+		
+		map.setMapStyle({style:'midnight'});//风格 深蓝
+		//map.setMapStyle({style:'light'}); //淡蓝
+		
+		
+		var point = new BMap.Point(120.33, 31.61);
+		map.centerAndZoom(point, 15);
+		
+		//创建地图标物
+		var pt = new BMap.Point(120.33, 31.61);
+		var myIcon = new BMap.Icon("/biApp/css/map/map_all.png", new BMap.Size(37,37),{'imageOffset':new BMap.Size(-291,0)});
+		var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+		
+		marker2.addEventListener("click",attribute);
+		
+		
+		map.addOverlay(marker2);              // 将标注添加到地图中
+		
+		function attribute(){
+			var p = marker2.getPosition();  //获取marker的位置
+			alert("marker的位置是" + p.lng + "," + p.lat);    
+		}
+		
+		//绘制多边形
+		addPolygon();
+</script>
+</html>
+

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="">
+        
+        <title>龙湖</title>
+
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+        <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        <link rel="stylesheet" href="/biApp/assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/biApp/assets/css/jquery.mCustomScrollbar.min.css" />
+        <link rel="stylesheet" href="/biApp/assets/css/custom.css">    
+        <link rel="stylesheet" href="/biApp/assets/css/custom-themes.css">  
+        
+        <!-- 引入Bootstrap -->
+		<script src="/biApp/js/3rd/jquery3.2.1.js"></script>
+		<script src="/biApp/js/3rd/bootstrap/js/bootstrap.min.js"></script>
+		<link href="/biApp/js/3rd/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="/biApp/js/3rd/bootstrap/css/bootstrap-tab.css" >
+		<link href="/biApp/js/3rd/bootstrap/css/bootstrap-cerulen.min.css" >
+	
+        <script src="/biApp/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="/biApp/assets/js/custom.js"></script>
+        <script src="/biApp/js/3rd/bootstrap/js/bootstrap-tab.js"></script>
+        
+        <!-- 地图 -->
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nfuoTEO917xze9Hitfa1Kv4V9Blxan8m"></script> 
+		<script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+		
+    </head>
+
+    <body>
+        <div class="page-wrapper default-theme">
+            <nav id="sidebar" class="sidebar-wrapper">
+              <div class="sidebar-content">
+                <a href="#" id="toggle-sidebar"><i class="fa fa-bars"></i></a>
+                <div class="sidebar-brand">
+                    <a href="#">pro sidebar</a>
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img class="img-responsive img-rounded" src="assets/img/user.jpg" alt="">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Jhon <strong>Smith</strong></span>
+                        <span class="user-role">Administrator</span>
+                        <div class="user-status">                       
+                            <a href="#"><span class="label label-success">Online</span></a>                           
+                        </div>
+                    </div>
+                </div><!-- sidebar-header  -->
+                <div class="sidebar-search">
+                    <div>                   
+                        <div class="input-group">                          
+                            <input type="text" class="form-control search-menu" placeholder="Search for...">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>                    
+                </div><!-- sidebar-search  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu"><span>General</span></li>
+                        <li class="sidebar-dropdown">
+                            <a  href="#" ><i class="fa fa-dashboard"></i><span>Dashboard</span><!--  <span class="label label-danger">New</span>--></a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a href="#" >Dashboard 1<span class="label label-success">Pro</span></a> </li>
+                                    <li><a href="#" class="menuItem" url="./mapDemp2">Dashboard 2</a></li>
+                                    <li><a href="#" class="menuItem" url="./mapDemp2">Dashboard 3</a></li>
+                                </ul>
+                            </div>
+                        </li>    
+                        <!--           
+                        <li class="sidebar-dropdown">
+                            <a href="#"><i class="fa fa-shopping-cart"></i><span>E-commerce</span><span class="badge">3</span></a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a href="#">Products<span class="badge">2</span></a></li>
+                                    <li><a href="#">Orders</a></li>
+                                    <li><a href="#">Credit cart</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                          -->   
+                         <li class="sidebar-dropdown">
+                            <a href="#"><i class="fa fa-diamond"></i><span>人事管理</span></a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a href="#">用户列表</a></li>
+                                    <li><a href="#">权限管理</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#"><i class="fa fa-bar-chart-o"></i><span>报表</span></a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a href="#">Pie chart</a></li>
+                                    <li><a href="#">Line chart</a></li>
+                                    <li><a href="#">Bar chart</a></li>
+                                    <li><a href="#">Histogram</a></li>
+
+
+                                </ul>
+                            </div>
+                        </li>
+                       
+                         <li class="sidebar-dropdown">
+                            <a href="#"><i class="fa fa-globe"></i><span>地图</span></a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a href="#" onclick="addTab('地图展示','地图展示','/biApp/views/maps/showMap.html')">地图展示</a></li>
+                                    <li><a href="#" onclick="addTab('地图1','地图','/biApp/views/maps/map1.html')">地图样例1</a></li>
+                                    <li><a href="#" onclick="addTab('地图维护','数据维护','/biApp/views/maps/mapManager.html')">区域列表维护</a></li>
+                                    <li><a href="#" onclick="addTab('标物维护','标物维护','/biApp/views/maps/mapPoints.html')">地图标物维护</a></li>
+                                    <li><a href="#" onclick="addTab('区域列表','区域列表','/biApp/views/maps/regionList.html')">区域列表</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="header-menu"><span>Extra</span></li>
+                        <li><a href="#"><i class="fa fa-calendar"></i><span>Calendar</span></a></li>                   
+                        <li><a href="#"><i class="fa fa-folder"></i><span>Examples</span></a></li>
+                    
+                        <li><a href="#"><i class="fa fa-book"></i><span>Documentation</span></a></li>
+                    </ul>
+                   </div><!-- sidebar-menu  -->            
+                </div><!-- sidebar-content  -->
+        
+                <div class="sidebar-footer">
+                    <a href="#"><i class="fa fa-bell"></i><!-- <span class="label label-warning notification">3</span> --></a>
+                    <a href="#"><i class="fa fa-envelope"></i><!-- <span class="label label-success notification">7</span> --></a>
+                    <a href="#"><i class="fa fa-gear"></i><!-- <span class="badge-sonar"></span> --></a>
+                    <a href="#"><i class="fa fa-power-off"></i></a>
+                </div>
+            </nav><!-- sidebar-wrapper  -->
+            
+            
+            <!-- mainPage -->
+            <main class="page-content">
+            	<div id="tabContainer"></div>
+            </main>
+            <!-- page-content" -->
+            
+            
+        </div><!-- page-wrapper -->
+
+    </body>
+
+</html>
+<script>
+//开启左边栏
+$(".page-wrapper").toggleClass("toggled");
+
+$("#tabContainer").tabs({
+    data: [{
+        id: '地图展示',
+        text: '地图展示',
+        url: "/biApp/views/maps/showMap.html",
+        closeable: true
+    }],
+    showIndex: 0,
+    loadAll: false
+})
+
+//$("#tabContainer").data("tabs").addTab({id: 'test', text: 'addTab', closeable: true, url: './mapDemp2.html'});
+
+/* $(".menuItem").bind("click",function(event,data){
+	addTab('aaa','aaa',this);
+	return false;
+}); */
+
+
+function addTab(id,title,url){
+	$("#tabContainer").data("tabs").addTab({'id': id, 'text': title, 'closeable': true, 'url': url})
+}
+
+</script>
