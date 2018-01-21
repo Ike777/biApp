@@ -1,82 +1,81 @@
 {
-success:1,
-mes:"",
-t:{
-	regionPointsVoList:[
-		{
-			mapRegion:{
-				id:1
-				regionName:'雨花区',
-				regionCode:'WX001',
-				price:'10000',
-				populationSt:'aaaa'
-			
+	"success": 1,
+	"mes": "",
+	"t": {
+		"regionPointsVoList": [{
+				"mapRegion": {
+					"id": "1",
+					"regionName": "雨心区",
+					"regionCode": "WX001",
+					"price": "15000",
+					"populationSt": "S",
+					"levelSt":"1"
+					
+				},
+
+				"mapPoints": [{
+						"lng": "120.314334",
+						"lat": "31.626666",
+						"mapOrder": 1
+					},
+					{
+						"lng": "120.31922",
+						"lat": "31.624637",
+						"mapOrder": 2
+					},
+					{
+						"lng": "120.317927",
+						"lat": "31.617934",
+						"mapOrder": 3
+					},
+					{
+						"lng": "120.314621",
+						"lat": "31.619902",
+						"mapOrder": 4
+					}
+
+				]
+
 			},
-			
-			mapPoints:[
-				{
-					lng:'120.314334',
-					lat:'31.626666',
-					mapOrder:1
+			{
+				"mapRegion": {
+					"id": 2,
+					"regionName": "天心区",
+					"regionCode": "WX002",
+					"price": "12000",
+					"populationSt": "S",
+					"levelSt":"2"
+
 				},
-				{
-					lng:'120.31922',
-					lat:'31.624637',
-					mapOrder:2
-				},
-				{
-					lng:'120.317927',
-					lat:'31.617934',
-					mapOrder:3
-				},
-				{
-					lng:'120.314621',
-					lat:'31.619902',
-					mapOrder:4
-				}
-			
-			]
-			
-		},
-		{
-			mapRegion:{
-				id:2
-				regionName:'天心区',
-				regionCode:'WX002',
-				price:'12000',
-				populationSt:'S'
-			
-			},
-			
-			mapPoints:[
-				{
-					lng:'120.334384',
-					lat:'31.618918',
-					mapOrder:1
-				},
-				{
-					lng:'120.340852',
-					lat:'31.620886',
-					mapOrder:2
-				},
-				{
-					lng:'120.345523',
-					lat:'31.616642',
-					mapOrder:3
-				},
-				{
-					lng:'120.340492',
-					lat:'31.61369',
-					mapOrder:4
-				}
-			
-			]
-		}
-	
-	]
+
+				"mapPoints": [{
+						"lng": "120.334384",
+						"lat": "31.618918",
+						"mapOrder": 1
+					},
+					{
+						"lng": "120.340852",
+						"lat": "31.620886",
+						"mapOrder": 2
+					},
+					{
+						"lng": "120.345523",
+						"lat": "31.616642",
+						"mapOrder": 3
+					},
+					{
+						"lng": "120.340492",
+						"lat": "31.61369",
+						"mapOrder": 4
+					}
+
+				]
+			}
+
+		]
 
 
-}
+	}
 
 
 }

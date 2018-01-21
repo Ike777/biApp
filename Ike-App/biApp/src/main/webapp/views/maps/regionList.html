@@ -10,6 +10,22 @@
 	<meta http-equiv="expires" content="">
 	
 	
+	
+	<!-- 引入Bootstrap -->
+	<script src="/biApp/js/3rd/jquery3.2.1.js"></script>
+	<script src="/biApp/js/3rd/bootstrap/js/bootstrap.min.js"></script>
+	<link href="/biApp/js/3rd/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="/biApp/js/3rd/bootstrap/css/bootstrap-tab.css" >
+	<link href="/biApp/js/3rd/bootstrap/css/bootstrap-cerulen.min.css" >
+	
+	<script src="/biApp/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="/biApp/assets/js/custom.js"></script>
+	<script src="/biApp/js/3rd/bootstrap/js/bootstrap-tab.js"></script>
+	
+	<!-- 地图 -->
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nfuoTEO917xze9Hitfa1Kv4V9Blxan8m"></script> 
+	<script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+		
 	<script src="/biApp/views/maps/mapManager.js"></script>
 	<!-- 引入bootstrap-table -->
 	<script src="/biApp/js/3rd/bootstrap/bootstrapTable/bootstrap-table.min.js"></script>
@@ -104,8 +120,12 @@
 		 <button id="btn_add" type="button" class="btn btn-primary" >
 		      <span class="glyphicon glyphicon-save" aria-hidden="true"></span>保存
 		 </button>
+		 
+		 <button id="editIcon" type="button" class="btn btn-primary" >
+		      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>新增图标
+		 </button>
 	 </div>
-	
+	 
 	<div id="itemList" class="itemListCss">
 		<span class="label label-primary">周边信息</span>
 		<span class="label label-primary">区域信息</span>
@@ -207,15 +227,88 @@
 		 </div><!-- end row -->
 		 
 		</div>
-      </div><!-- end modal -->
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         <button type="button" class="btn btn-primary" id="regionSubmit">保存</button>
       </div>
     </div>
   </div>
-</div>
+</div><!-- end modal -->
 	
+	
+	
+	<!--Region Edit Modal -->
+<div class="modal fade" id="iconEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">新增图标</h4>
+      </div>
+      <div class="modal-body">
+       	<div class="container">
+	 
+		 <div class="row"><!-- start row -->
+		 	<div class="col-sm-3">
+		 		<div class="form-group form-group-sm">
+							<label class="control-label"><b>*</b>标物类型</label>
+							<p>
+								<select class="selectpicker" id="iconSt">
+								  <option>学校</option>
+								  <option>商场</option>
+								  <option>医院</option>
+								  <option>产业园</option>
+								  <option>企业</option>
+								  <option>物业</option>
+								  <option>交通站点</option>
+								</select>
+							</p>
+						</div>
+		 	</div>
+		 	
+		 	<div class="col-sm-3">
+		 		<div class="form-group form-group-sm">
+							<label class="control-label"><b>*</b>物业类型</label>
+							<p>
+								<select class="selectpicker" id="realEstateSt">
+								  <option>住宅</option>
+								  <option>商业</option>
+								  <option>办公</option>
+								  <option>公寓</option>
+								</select>
+							</p>
+						</div>
+		 	</div>
+		 	
+		 </div><!-- end row -->
+		 
+		  <div class="row"><!-- start row -->
+		 	<div class="col-sm-3">
+		 		<div class="form-group form-group-sm">
+							<label class="control-label"><b>*</b>公寓类型</label>
+							<p>
+								<select class="selectpicker" id="apartmentSt">
+								  <option>普通住宅</option>
+								  <option>洋房</option>
+								  <option>别墅</option>
+								</select>
+							</p>
+						</div>
+		 	</div>
+		 	
+		 	
+		 </div><!-- end row -->
+		 
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="iconSubmit">保存</button>
+      </div>
+    </div>
+  </div>
+</div><!-- end modal -->
 	
 </body>
 
@@ -226,6 +319,7 @@
 			var points = [];
 			var markers = [];
 			var regionObj ={};
+			var tmpIcon = {};
 			
 			//消息组件初始化
 			Messenger.options = {
@@ -358,6 +452,9 @@
 		    
 		    //绑定页面事件
 		    $('#mapBar').hide();
+		    $('#iconBar').hide();
+		    
+		  //************************* region start *************************/
 		    $('#btn_add').bind('click',function(){
 		    	//绑定地图选点
 		    	map.addEventListener("click", drawItem);
@@ -371,15 +468,7 @@
 		    $('#closeDraw').bind('click',function(){
 		    	createPol(map);
 		    });
-		    //新增地图标物
-		    $('#addIcon').bind('click',function(){
-		    	console.log(regionTable);
-		    	var rows = regionTable.bootstrapTable('getSelections');//获取Table选中的行
-		    	if(rows.length != 1){
-		    		alert('请选择一条记录');
-		    	}
-		    	
-		    });
+		    
 		    
 		    //提交Region
 		    $('#regionSubmit').bind('click',function(){
@@ -411,8 +500,35 @@
 			    //regionTable.bootstrapTable('getData');
 		    });
 		    
+		   //************************* region end *************************/
 		    
 		    
+		  //************************* Icon start *************************/ 
+		  //新增Icon
+		    $('#addIcon').bind('click',function(){
+		    	console.log(regionTable);
+		    	var rows = regionTable.bootstrapTable('getSelections');//获取Table选中的行
+		    	if(rows.length != 1){
+		    		alert('请选择一条记录');
+		    	}
+		    	
+		    	//绑定添加标物事件
+		    	map.addEventListener("click", addMapIcons);
+		    	//显示菜单栏
+		    	$('#mapBar').show();
+		    });
+		    
+		    //编辑Icon
+		    $('#editIcon').bind('click',function(){
+		    	$('#iconEditModal').modal('show');
+		    });
+		    
+		    //提交Icon
+		     $('#iconSubmit').bind('click',function(){
+		    	 submitIcon();
+		    	 tmpIcon = {};
+		    });
+		  //************************* Icon end *************************/
 		    
 	    function drawItem(e){
 	    	//alert(e.point.lng + ", " + e.point.lat);
@@ -427,7 +543,7 @@
 
 	    function createPol(map){
 			var polygon = new BMap.Polygon(points,{strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});
-			//polygon.setFillColor("FFFFCC");
+			polygon.setFillColor("FFFFCC");
 			
 			map.addOverlay(polygon);  
 			points=[];
@@ -485,6 +601,31 @@
 				resultArr.push(tmpPoint);
 			}
 			return resultArr;
+		}
+		
+		function addMapIcons(e){
+			tmpIcon = {};
+			console.log(e.point.lng + ", " + e.point.lat);	
+	    	
+	    	//地图上描绘该点
+	    	var marker = new BMap.Marker(new BMap.Point(e.point.lng,e.point.lat));
+	    	map.addOverlay(marker);
+	    	
+	    	var tmpPoint = {};
+			tmpPoint.lng = e.point.lng;
+			tmpPoint.lat = e.point.lat;
+			
+	    	tmpIcon.point = tmpPoint;
+	    	
+	    	console.log(regionTable.bootstrapTable('getSelections'));
+	    	
+	    	tmpIcon.regionId = regionTable.bootstrapTable('getSelections').id;
+	    	
+
+		}
+		
+		function submitIcon(){
+			
 		}
 		
 		});
