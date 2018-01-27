@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="org.Ike.Api.icon.model.MapIcon" >
     <id column="ID" property="id" jdbcType="INTEGER" />
     <result column="ICON_NAME" property="iconName" jdbcType="VARCHAR" />
-    <result column="REGION_ID" property="regionId" jdbcType="INTEGER" />
     <result column="ICON_ST" property="iconSt" jdbcType="VARCHAR" />
     <result column="REAL_ESTATE_ST" property="realEstateSt" jdbcType="VARCHAR" />
     <result column="APARTMENT_ST" property="apartmentSt" jdbcType="VARCHAR" />
@@ -13,38 +12,39 @@
     <result column="SYS_CREATE_DATE" property="sysCreateDate" jdbcType="DATE" />
     <result column="VERSION" property="version" jdbcType="INTEGER" />
     <result column="DISABLED" property="disabled" jdbcType="INTEGER" />
+    <result column="POINT_ID" property="pointId" jdbcType="INTEGER" />
+    <result column="REGION_ID" property="regionId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ICON_NAME, REGION_ID, ICON_ST, REAL_ESTATE_ST, APARTMENT_ST, IS_ESTATE, CREATE_DATE,
-    SYS_CREATE_DATE, VERSION, DISABLED
+    ID, ICON_NAME, ICON_ST, REAL_ESTATE_ST, APARTMENT_ST, IS_ESTATE, CREATE_DATE, SYS_CREATE_DATE,
+    VERSION, DISABLED, POINT_ID, REGION_ID
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from IKE_MAP_ICON
+    from ike_map_icon
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <insert id="insert" parameterType="org.Ike.Api.icon.model.MapIcon" >
-    insert into IKE_MAP_ICON (ID, ICON_NAME, REGION_ID,
-    ICON_ST, REAL_ESTATE_ST, APARTMENT_ST,
-    IS_ESTATE, CREATE_DATE, SYS_CREATE_DATE,
-    VERSION, DISABLED)
-    values (#{id,jdbcType=INTEGER}, #{iconName,jdbcType=VARCHAR}, #{regionId,jdbcType=INTEGER},
-    #{iconSt,jdbcType=VARCHAR}, #{realEstateSt,jdbcType=VARCHAR}, #{apartmentSt,jdbcType=VARCHAR},
-    #{isEstate,jdbcType=INTEGER}, #{createDate,jdbcType=DATE}, #{sysCreateDate,jdbcType=DATE},
-    #{version,jdbcType=INTEGER}, #{disabled,jdbcType=INTEGER})
+    insert into ike_map_icon (ID, ICON_NAME, ICON_ST,
+    REAL_ESTATE_ST, APARTMENT_ST, IS_ESTATE,
+    CREATE_DATE, SYS_CREATE_DATE, VERSION,
+    DISABLED, POINT_ID, REGION_ID
+    )
+    values (#{id,jdbcType=INTEGER}, #{iconName,jdbcType=VARCHAR}, #{iconSt,jdbcType=VARCHAR},
+    #{realEstateSt,jdbcType=VARCHAR}, #{apartmentSt,jdbcType=VARCHAR}, #{isEstate,jdbcType=INTEGER},
+    #{createDate,jdbcType=DATE}, #{sysCreateDate,jdbcType=DATE}, #{version,jdbcType=INTEGER},
+    #{disabled,jdbcType=INTEGER}, #{pointId,jdbcType=INTEGER}, #{regionId,jdbcType=INTEGER}
+    )
   </insert>
   <insert id="insertSelective" parameterType="org.Ike.Api.icon.model.MapIcon" >
-    insert into IKE_MAP_ICON
+    insert into ike_map_icon
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,
       </if>
       <if test="iconName != null" >
         ICON_NAME,
-      </if>
-      <if test="regionId != null" >
-        REGION_ID,
       </if>
       <if test="iconSt != null" >
         ICON_ST,
@@ -70,6 +70,12 @@
       <if test="disabled != null" >
         DISABLED,
       </if>
+      <if test="pointId != null" >
+        POINT_ID,
+      </if>
+      <if test="regionId != null" >
+        REGION_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -77,9 +83,6 @@
       </if>
       <if test="iconName != null" >
         #{iconName,jdbcType=VARCHAR},
-      </if>
-      <if test="regionId != null" >
-        #{regionId,jdbcType=INTEGER},
       </if>
       <if test="iconSt != null" >
         #{iconSt,jdbcType=VARCHAR},
@@ -105,16 +108,19 @@
       <if test="disabled != null" >
         #{disabled,jdbcType=INTEGER},
       </if>
+      <if test="pointId != null" >
+        #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="org.Ike.Api.icon.model.MapIcon" >
-    update IKE_MAP_ICON
+    update ike_map_icon
     <set >
       <if test="iconName != null" >
         ICON_NAME = #{iconName,jdbcType=VARCHAR},
-      </if>
-      <if test="regionId != null" >
-        REGION_ID = #{regionId,jdbcType=INTEGER},
       </if>
       <if test="iconSt != null" >
         ICON_ST = #{iconSt,jdbcType=VARCHAR},
@@ -140,13 +146,18 @@
       <if test="disabled != null" >
         DISABLED = #{disabled,jdbcType=INTEGER},
       </if>
+      <if test="pointId != null" >
+        POINT_ID = #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="regionId != null" >
+        REGION_ID = #{regionId,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.Ike.Api.icon.model.MapIcon" >
-    update IKE_MAP_ICON
+    update ike_map_icon
     set ICON_NAME = #{iconName,jdbcType=VARCHAR},
-    REGION_ID = #{regionId,jdbcType=INTEGER},
     ICON_ST = #{iconSt,jdbcType=VARCHAR},
     REAL_ESTATE_ST = #{realEstateSt,jdbcType=VARCHAR},
     APARTMENT_ST = #{apartmentSt,jdbcType=VARCHAR},
@@ -154,9 +165,12 @@
     CREATE_DATE = #{createDate,jdbcType=DATE},
     SYS_CREATE_DATE = #{sysCreateDate,jdbcType=DATE},
     VERSION = #{version,jdbcType=INTEGER},
-    DISABLED = #{disabled,jdbcType=INTEGER}
+    DISABLED = #{disabled,jdbcType=INTEGER},
+    POINT_ID = #{pointId,jdbcType=INTEGER},
+    REGION_ID = #{regionId,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
   <resultMap id="ResponseMap" type="com.system.response.MapIconResponse" >
     <id column="ID" property="id" jdbcType="INTEGER" />
     <result column="ICON_NAME" property="iconName" jdbcType="VARCHAR" />

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="">
+    <style type="text/css">
+/*
+        body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+
+        #showSelfMap{width:85%;height:700px;margin-left:15px;margin-top:60px;}
+        p{margin-left:5px; font-size:14px;}
+
+        .restaurant1 {
+            background-position: -291px 0;
+        }
+
+        .itemListCss{
+            margin-left:400px;
+            padding-top:10px;
+        }
+
+        .addWidth{
+            width:80% !important;
+        }
+
+        .searchGroupCss{
+            width:380px;
+            margin-top:10px;
+            margin-left:10px;
+        }
+
+        .marginTop{
+            margin-top:10px;
+        }
+
+        .panel-body {
+            padding: 5px;
+        }
+        .temp{
+            border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+        }
+*/
+
+    </style>
+
+    <title>地图信息维护</title>
+</head>
+<body>
+<div id="showSelfMap" style="height: 500px"></div>
+<div id="showMapBar" class="btn-group" style="margin-left: 15px;margin-top: -1480px;">
+    <button id="showMapBtn" type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>比较
+    </button>
+</div>
+<script src="../assets/js/jquery-3.2.1.js"></script>
+<script src="../../js/selfMap/showMap.js"></script>
+<!-- 引入bootstrap-table -->
+<script src="../../js/3rd/bootstrap/bootstrapTable/bootstrap-table.min.js"></script>
+<link href="../../js/3rd/bootstrap/bootstrapTable/bootstrap-table.min.css" rel="stylesheet"/>
+<script src="../../js/3rd/bootstrap/bootstrapTable/locale/bootstrap-table-zh-CN.js"></script>
+<!-- 引入bootstrap-select -->
+<script src="../../js/3rd/bootstrap/select/js/bootstrap-select.min.js"></script>
+<script src="../../js/3rd/bootstrap/select/js/i18n/defaults-zh_CN.min.js"></script>
+<link href="../../js/3rd/bootstrap/select/css/bootstrap-select.min.css" rel="stylesheet"/>
+<!-- messenger -->
+<script src="../../js/3rd/bootstrap/messenger/js/messenger.min.js"></script>
+<script src="../../js/3rd/bootstrap/messenger/js/messenger-theme-future.js"></script>
+<link href="../../js/3rd/bootstrap/messenger/css/messenger.css" rel="stylesheet"/>
+<link href="../../js/3rd/bootstrap/messenger/css/messenger-theme-future.css" rel="stylesheet"/>
+<!-- 引入公共方法 -->
+<script src="../../js/service/authService.js"></script>
+<script src="../../js/service/messageService.js"></script>
+<!-- 地图 -->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nfuoTEO917xze9Hitfa1Kv4V9Blxan8m"></script>
+<script type="text/javascript"
+        src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        //消息组件初始化
+        Messenger.options = {
+            extraClasses: 'messenger-fixed messenger-on-top messenger-on-right',
+            theme: 'future'
+        };
+
+        // 百度地图API功能
+        var map = new BMap.Map("showSelfMap");
+        map.addControl(new BMap.NavigationControl());// 添加平移缩放控件
+        map.addControl(new BMap.ScaleControl()); // 添加比例尺控件
+        map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
+        map.enableScrollWheelZoom();   //启用滚轮放大缩小
+        map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+
+        //map.setMapStyle({style:'midnight'});//风格 深蓝
+        map.setMapStyle({style: 'light'}); //淡蓝
+
+
+        var point = new BMap.Point(120.33, 31.61);
+        map.centerAndZoom(point, 15);
+
+        //创建地图标物
+        var pt = new BMap.Point(120.33, 31.61);
+        var myIcon = new BMap.Icon("/biApp/css/map/mapIcon1.png", new BMap.Size(37, 37), {'imageOffset': new BMap.Size(-291, 0)});
+        var marker2 = new BMap.Marker(pt, {icon: myIcon});  // 创建标注
+
+        map.addOverlay(marker2);              // 将标注添加到地图中
+        function showInfo(e) {
+            console.log(e.point.lng + ", " + e.point.lat);
+        }
+
+        map.addEventListener("click", showInfo);
+
+
+        //加载选择框
+        /* $('.selectpicker').selectpicker({
+         style: 'btn-info',
+         size: 5
+         });	 */
+
+
+        $('#showMapBtn').bind('click', function () {
+            //显示地图区域
+            //initShowMap(map);
+        });
+        //显示地图区域
+        initShowMap(map);
+
+    });
+</script>
+</body>
+

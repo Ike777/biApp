@@ -15,6 +15,6 @@
 <a  href="./login2.html" >登录2</a><br>
 <a  href="./main.html" >主页</a><br>
 <a  href="./main2.html" >主页2</a><br>
-<a  href="./ace/views/index.html" >ace</a><br>
+<a  href="./ace.html" >ace</a><br>
 </body>
 </html>

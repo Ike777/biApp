@@ -14,11 +14,6 @@ public class MapIcon {
     private String iconName;
 
     /**
-     * MAP_REGION.ID
-     */
-    private Integer regionId;
-
-    /**
      * 标物类型Code 候选项： 学校 商场 医院 产业园 重点企业 物业 交通站点
      */
     private String iconSt;
@@ -58,6 +53,16 @@ public class MapIcon {
      */
     private Integer disabled;
 
+    /**
+     *
+     */
+    private Integer pointId;
+
+    /**
+     *
+     */
+    private Integer regionId;
+
 
 
     public Integer getId() {
@@ -76,16 +81,6 @@ public class MapIcon {
 
     public void setIconName(String iconName) {
         this.iconName = iconName == null ? null : iconName.trim();
-    }
-
-
-
-    public Integer getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(Integer regionId) {
-        this.regionId = regionId;
     }
 
 
@@ -166,5 +161,25 @@ public class MapIcon {
 
     public void setDisabled(Integer disabled) {
         this.disabled = disabled;
+    }
+
+
+
+    public Integer getPointId() {
+        return pointId;
+    }
+
+    public void setPointId(Integer pointId) {
+        this.pointId = pointId;
+    }
+
+
+
+    public Integer getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(Integer regionId) {
+        this.regionId = regionId;
     }
 }

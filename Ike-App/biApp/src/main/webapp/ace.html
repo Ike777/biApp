@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>龙湖</title>
+    <!-- basic styles -->
+    <link href="/biApp/ace/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/biApp/ace/assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/biApp/ace/project/css/main.css"/>
+    <!-- ace styles -->
+    <link rel="stylesheet" href="/biApp/ace/assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="/biApp/ace/assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="/biApp/ace/assets/css/ace-skins.min.css"/>
+
+    <!-- ace settings handler -->
+    <script src="/biApp/ace/assets/js/ace-extra.min.js"></script>
+</head>
+
+<body>
+<!-- 头部 begin-->
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {
+        }
+    </script>
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="/biApp/ace.html" class="navbar-brand">
+                <small>
+                    <i class="icon-leaf"></i>
+                    龙湖后台管理系统
+                </small>
+            </a><!-- /.brand -->
+        </div><!-- /.navbar-header -->
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        admin
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="#">
+                                <i class="icon-off"></i>
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul><!-- /.ace-nav -->
+        </div><!-- /.navbar-header -->
+    </div><!-- /.container -->
+</div>
+<!-- 头部 end-->
+
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+        <!--菜单 begin-->
+        <div class="sidebar" id="sidebar">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'fixed')
+                } catch (e) {
+                }
+            </script>
+
+            <ul class="nav nav-list" id="menu">
+
+            </ul>
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                   data-icon2="icon-double-angle-right"></i>
+            </div>
+            <!-- 菜单左右滑动 end-->
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'collapsed')
+                } catch (e) {
+                }
+            </script>
+        </div>
+        <!-- 菜单end -->
+
+
+        <div class="main-content">
+            <!-- 导航条 begin-->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <div class="nav-tabs"></div>
+            </div>
+            <!-- 导航条 end-->
+            <div class="page-content" style="height: 600px;padding: 0px">
+                <div class="tab-content">
+                </div>
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+
+<!-- js -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/biApp/ace/assets/js/jquery-2.0.3.min.js'>" + "<" + "script>");
+</script>
+
+<script type="text/javascript">
+    if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
+</script>
+<script src="/biApp/ace/assets/js/bootstrap.min.js"></script>
+<script src="/biApp/ace/assets/js/typeahead-bs2.min.js"></script>
+
+<!-- ace scripts -->
+<script src="/biApp/ace/assets/js/ace-elements.min.js"></script>
+<script src="/biApp/ace/assets/js/ace.min.js"></script>
+<script src="/biApp/ace/project/js/tab.js"></script>
+<script src="/biApp/ace/project/js/main.js"></script>
+
+
+<script>
+    $(function () {
+        $('#menu').sidebarMenu({
+            data: [{
+                id: '1',
+                text: '首页',
+                icon: 'icon-cog',
+                url: '/biApp/ace/project/showMap.html'
+            }, {
+                id: '2',
+                text: '区域列表',
+                icon: 'icon-cog',
+                url: '/biApp/ace/project/regionList.html',
+            }]
+        });
+        addTabs({id: "1", title: "首页", close: false, url: "/biApp/ace/project/showMap.html"});
+    });
+
+    /** ,{
+                id: '2',
+                text: '区域列表',
+                icon: 'icon-cog',
+                url: '',
+                menus: [{
+                    id: '21',
+                    text: '前端测试',
+                    icon: 'icon-glass',
+                    url: '/ace/index.html'
+                }]
+            }]
+     */
+</script>
+</body>
+</html>
+
