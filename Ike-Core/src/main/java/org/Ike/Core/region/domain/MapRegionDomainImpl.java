@@ -11,7 +11,6 @@ import org.Ike.Api.region.domain.MapRegionDomain;
 import org.Ike.Api.region.model.MapRegion;
 import org.Ike.Api.region.model.RegionPointsVo;
 import org.Ike.Api.region.service.MapRegionService;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,6 @@ public class MapRegionDomainImpl implements MapRegionDomain {
     @Autowired
     private MapPointsService mapPointsService;
 
-    @Override
     public Page getMapRegionByPage(MapRegionRequest request, Page page) {
         List<MapRegionResponse> list = null;
         try {
@@ -51,7 +49,6 @@ public class MapRegionDomainImpl implements MapRegionDomain {
         return page.setRows(list);
     }
 
-    @Override
     public void createRegion(RegionPointsVo regionPointsVo) {
 
         MapRegion mapRegion = regionPointsVo.getMapRegion();

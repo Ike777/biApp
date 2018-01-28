@@ -45,11 +45,14 @@ $(function () {
     mainHeight = $(document.body).height() - 45;
     $('.main-left,.main-right').height(mainHeight);
     $("[addtabs]").click(function () {
-        addTabs({ id: $(this).attr("id"), title: $(this).attr('title'), close: true });
+        addTabs({id: $(this).attr("id"), title: $(this).attr('title'), close: true});
     });
-
     $(".nav-tabs").on("click", "[tabclose]", function (e) {
         id = $(this).attr("tabclose");
         closeTab(id);
+    });
+    // 2018-01-28
+    $(".nav-tabs").on("click", function (e) {
+        $(this).find("li").addClass("active").siblings().removeClass("active");
     });
 });

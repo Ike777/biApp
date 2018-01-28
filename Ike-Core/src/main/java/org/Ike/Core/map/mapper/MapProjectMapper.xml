@@ -146,4 +146,18 @@
       DISABLED = #{disabled,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="ResponseMap" type="com.system.response.MapProjectResponse" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="AREA_AMOUNT" property="areaAmount" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="getMapProjectByPage" resultMap="ResponseMap">
+    select
+    <include refid="Base_Column_List" />
+    from map_project
+    where DISABLED = 0
+  </select>
 </mapper>
