@@ -506,7 +506,7 @@
 		  //************************* Icon start *************************/ 
 		  //新增Icon
 		    $('#addIcon').bind('click',function(){
-		    	console.log(regionTable);
+		    	//onsole.log(regionTable);
 		    	var rows = regionTable.bootstrapTable('getSelections');//获取Table选中的行
 		    	if(rows.length != 1){
 		    		alert('请选择一条记录');
@@ -532,7 +532,7 @@
 		    
 	    function drawItem(e){
 	    	//alert(e.point.lng + ", " + e.point.lat);
-	    	console.log(e.point.lng + ", " + e.point.lat);
+	    	//console.log(e.point.lng + ", " + e.point.lat);
 	    	points.push(new BMap.Point(e.point.lng,e.point.lat));
 	    	
 	    	//
@@ -605,7 +605,7 @@
 		
 		function addMapIcons(e){
 			tmpIcon = {};
-			console.log(e.point.lng + ", " + e.point.lat);	
+			//console.log(e.point.lng + ", " + e.point.lat);
 	    	
 	    	//地图上描绘该点
 	    	var marker = new BMap.Marker(new BMap.Point(e.point.lng,e.point.lat));

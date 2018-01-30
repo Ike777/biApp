@@ -9,14 +9,17 @@ import org.Ike.Api.points.model.MapPoints;
 import org.Ike.Api.points.service.MapPointsService;
 import org.Ike.Api.region.domain.MapRegionDomain;
 import org.Ike.Api.region.model.MapRegion;
+import org.Ike.Api.region.model.RegionDict;
 import org.Ike.Api.region.model.RegionPointsVo;
 import org.Ike.Api.region.service.MapRegionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -71,5 +74,17 @@ public class MapRegionDomainImpl implements MapRegionDomain {
         List<MapPoints> mapPoints = regionPointsVo.getMapPoints();
         mapPointsService.savePointsRl(mapPoints, mapRegion.getId());
 
+    }
+
+    @Override
+    public List<RegionDict> getRegionDictList() {
+        List<RegionDict> list = new ArrayList<RegionDict>();
+        List<MapRegion> mapRegionList = mapRegionService.getMapRegionList(new MapRegionRequest());
+        for (MapRegion mapRegion : mapRegionList) {
+            RegionDict dict = new RegionDict();
+            BeanUtils.copyProperties(mapRegion,dict);
+            list.add(dict);
+        }
+        return list;
     }
 }

@@ -2,7 +2,10 @@ package org.Ike.Api.region.domain;
 
 import com.system.mybatis.Page;
 import com.system.request.MapRegionRequest;
+import org.Ike.Api.region.model.RegionDict;
 import org.Ike.Api.region.model.RegionPointsVo;
+
+import java.util.List;
 
 /**
  * <pre>
@@ -27,4 +30,11 @@ public interface MapRegionDomain {
      * @param regionPointsVo
      */
     void createRegion(RegionPointsVo regionPointsVo);
+
+    /**
+     * 获取标物列表，返回dict
+     *
+     * @return
+     */
+    List<RegionDict> getRegionDictList();
 }

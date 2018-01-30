@@ -47,12 +47,19 @@ $(function () {
     $("[addtabs]").click(function () {
         addTabs({id: $(this).attr("id"), title: $(this).attr('title'), close: true});
     });
-    $(".nav-tabs").on("click", "[tabclose]", function (e) {
-        id = $(this).attr("tabclose");
+    var $tabs = $(".nav-tabs");
+    $tabs.on("click", "[tabClose]", function (e) {
+        id = $(this).attr("tabClose");
         closeTab(id);
     });
-    // 2018-01-28
-    $(".nav-tabs").on("click", function (e) {
-        $(this).find("li").addClass("active").siblings().removeClass("active");
+    $tabs.on("click", "[aria-controls]", function (e) {
+        id = $(this).attr("aria-controls");
+        if (!$("#" + id).hasClass('active')) {
+            $("#" + id).addClass('active').siblings().removeClass('active');
+            $("#tab_" + id).addClass('active').siblings().removeClass('active');
+        } else {
+            $("#" + id).siblings().removeClass('active');
+            $("#tab_" + id).siblings().removeClass('active');
+        }
     });
 });

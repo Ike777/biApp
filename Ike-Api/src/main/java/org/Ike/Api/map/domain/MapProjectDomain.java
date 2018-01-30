@@ -19,4 +19,11 @@ public interface MapProjectDomain {
      * @return
      */
     Page getMapProjectByPage(MapProjectRequest request, Page page);
+
+    /**
+     * 保存
+     *
+     * @param request
+     */
+    void createMapProject(MapProjectRequest request) throws Exception;
 }

@@ -176,4 +176,14 @@
     from IKE_MAP_REGION
     where DISABLED = 0
   </select>
+
+  <select id="getMapRegionList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from IKE_MAP_REGION
+    where DISABLED = 0
+    <!--<if test=""></if>-->
+  </select>
+
+
 </mapper>
