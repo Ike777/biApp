@@ -35,7 +35,9 @@ SysService.doPost = function(data,url,cb){
 			  if(res.success){
 				  cb(res.t);
 				  return res;
-			  }
+			  }else{
+			      alert(res.message);
+              }
 		  },
 		  error:function(res){
 			  console.log(res)

@@ -66,8 +66,8 @@ public class TestController {
     public String export(HttpServletRequest request, HttpServletResponse response) {
         Excel excel = new Excel();
         // list
-        String[] fileds = { "---", "-----"};
-        String[] heads = { "", "" };
+        String[] fileds = {"---", "-----"};
+        String[] heads = {"", ""};
         excel.createHSSFSheet(null, heads, fileds, new ArrayList<>());
         excel.writeWebExcel(request, response, "导出");
         return null;
@@ -84,7 +84,7 @@ public class TestController {
             for (MultipartFile mf : fileMap.values()) {
                 ExcelImport re = new ExcelImport(mf.getInputStream());
                 //...do somethings
-                result.setSuccess(1);
+                result.setSuccess(true);
             }
         } catch (BusinessException e) {
             logger.error(e.getMessage(), e);
@@ -98,32 +98,6 @@ public class TestController {
         }
         return result;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

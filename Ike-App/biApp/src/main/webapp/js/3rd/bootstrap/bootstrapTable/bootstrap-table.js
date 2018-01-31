@@ -2353,6 +2353,7 @@
 
         if (this.options.showHeader && this.options.height) {
             this.$tableHeader.show();
+            //TODO 注释本行行表示 表头和内容对齐
             this.resetHeader();
             padding += this.$header.outerHeight();
         } else {

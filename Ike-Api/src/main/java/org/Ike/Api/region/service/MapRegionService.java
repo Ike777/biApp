@@ -30,4 +30,12 @@ public interface MapRegionService {
      * @param mapRegion
      */
     void save(MapRegion mapRegion);
+
+    /**
+     * 获取区域列表
+     *
+     * @param regionRequest
+     * @return
+     */
+    List<MapRegion> getMapRegionList(MapRegionRequest regionRequest);
 }

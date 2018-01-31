@@ -20,4 +20,6 @@ public interface MapRegionMapper {
     int updateByPrimaryKey(MapRegion record);
 
     List<MapRegionResponse> getMapRegionByPage(@Param("model") MapRegionRequest request, @Param("page") Page page);
+
+    List<MapRegion> getMapRegionList(@Param("model") MapRegionRequest regionRequest);
 }

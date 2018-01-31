@@ -35,4 +35,9 @@ public class MapRegionServiceImpl implements MapRegionService{
         mapRegion.setCreateDate(new Date());
         mapRegionMapper.insert(mapRegion);
     }
+
+    @Override
+    public List<MapRegion> getMapRegionList(MapRegionRequest regionRequest) {
+        return mapRegionMapper.getMapRegionList(regionRequest);
+    }
 }

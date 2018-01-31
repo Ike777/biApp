@@ -29,6 +29,19 @@ public class MapProjectResponse {
      */
     private Integer areaAmount;
 
+    /**
+     * 区域名
+     */
+    private String regionName;
+
+    public String getRegionName() {
+        return regionName;
+    }
+
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
+    }
+
     public Integer getId() {
         return id;
     }

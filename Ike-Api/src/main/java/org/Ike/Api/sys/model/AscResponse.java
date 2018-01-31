@@ -4,7 +4,7 @@ public class AscResponse<T> {
 	
 	private T t;
 	
-	private int success;
+	private Boolean success;
 	
 	private String message;
 	
@@ -12,12 +12,12 @@ public class AscResponse<T> {
 		
 	}
 
-	public AscResponse(String mes,int success){
+	public AscResponse(String mes,Boolean success){
 		this.setMessage(mes);
 		this.setSuccess(success);
 	}
 
-	public AscResponse(String mes,T t,int success){
+	public AscResponse(String mes,T t,Boolean success){
 		this.setMessage(mes);
 		this.setT(t);
 		this.setSuccess(success);
@@ -31,11 +31,11 @@ public class AscResponse<T> {
 		this.t = t;
 	}
 
-	public int getSuccess() {
+	public Boolean getSuccess() {
 		return success;
 	}
 
-	public void setSuccess(int success) {
+	public void setSuccess(Boolean success) {
 		this.success = success;
 	}
 
