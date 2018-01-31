@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Ike.iml" filepath="$PROJECT_DIR$/Ike.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ike-Api/Ike-Api.iml" filepath="$PROJECT_DIR$/Ike-Api/Ike-Api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ike-App/Ike-App.iml" filepath="$PROJECT_DIR$/Ike-App/Ike-App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ike-Commons/Ike-Commons.iml" filepath="$PROJECT_DIR$/Ike-Commons/Ike-Commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ike-Core/Ike-Core.iml" filepath="$PROJECT_DIR$/Ike-Core/Ike-Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ike-server/Ike-server.iml" filepath="$PROJECT_DIR$/Ike-server/Ike-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ike-App/biApp/lhApp.iml" filepath="$PROJECT_DIR$/Ike-App/biApp/lhApp.iml" />
+    </modules>
+  </component>
+</project>
