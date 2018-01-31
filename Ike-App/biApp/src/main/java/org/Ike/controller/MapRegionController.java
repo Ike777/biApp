@@ -44,7 +44,7 @@ public class MapRegionController {
         } catch (BusinessException e) {
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setMessage("服务异常");
+            response.setMessage("服务异常,请稍后再试.");
         }
         return response;
     }
