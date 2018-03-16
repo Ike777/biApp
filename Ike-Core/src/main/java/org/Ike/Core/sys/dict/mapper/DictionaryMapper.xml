@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.Ike.Core.sys.dict.mapper.DictionaryMapper" >
+    <resultMap id="BaseResultMap" type="org.Ike.Api.sys.model.Dictionary" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="CODE" property="code" jdbcType="VARCHAR" />
+        <result column="VALUE" property="value" jdbcType="VARCHAR" />
+        <result column="PARENT" property="parent" jdbcType="INTEGER" />
+        <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+        <result column="DISABLED" property="disabled" jdbcType="INTEGER" />
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="VERSION" property="version" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        ID, CODE, VALUE, PARENT, COMMENTS, DISABLED, CREATE_DATE, VERSION
+    </sql>
+
+    <select id="selectByParentCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        FROM SYS_DICT a, SYS_DICT DCT WHERE a.DCTID = DCT.DCTPARENT AND a.CODE = #{parentCode,jdbcType=VARCHAR} ORDER BY DCT.CODE ASC
+    </select>
+
+</mapper>

@@ -62,42 +62,4 @@ public class TestController {
     }
 
 
-    @RequestMapping(value = "/export.do")
-    public String export(HttpServletRequest request, HttpServletResponse response) {
-        Excel excel = new Excel();
-        // list
-        String[] fileds = {"---", "-----"};
-        String[] heads = {"", ""};
-        excel.createHSSFSheet(null, heads, fileds, new ArrayList<>());
-        excel.writeWebExcel(request, response, "导出");
-        return null;
-    }
-
-
-    @ResponseBody
-    @RequestMapping(value = "/import.do")
-    public AscResponse importData(MultipartHttpServletRequest request) {
-        AscResponse result = new AscResponse();
-        try {
-            Map<String, MultipartFile> fileMap = request.getFileMap();
-
-            for (MultipartFile mf : fileMap.values()) {
-                ExcelImport re = new ExcelImport(mf.getInputStream());
-                //...do somethings
-                result.setSuccess(true);
-            }
-        } catch (BusinessException e) {
-            logger.error(e.getMessage(), e);
-            result.setMessage(e.getMessage());
-        } catch (OfficeXmlFileException e) {
-            logger.error("文件上传错误：" + e.getMessage(), e);
-            result.setMessage("文件上传错误：这个Excel文件似乎是2007 + ，系统目前不支持！");
-        } catch (Exception e) {
-            logger.error("文件上传错误：" + e.getMessage(), e);
-            result.setMessage("文件格式不正确，请下载模版参考格式！");
-        }
-        return result;
-    }
-
-
 }

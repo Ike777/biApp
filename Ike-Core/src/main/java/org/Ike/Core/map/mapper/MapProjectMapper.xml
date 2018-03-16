@@ -20,11 +20,11 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from map_project
+        from ike_map_project
         where ID = #{id,jdbcType=INTEGER}
     </select>
     <insert id="insert" parameterType="org.Ike.Api.map.model.MapProject">
-    insert into map_project (ID, PROJECT_NAME, AREA, 
+    insert into ike_map_project (ID, PROJECT_NAME, AREA, 
       REGION_ID, REGION_NAME, AREA_AMOUNT, 
       PRICE, VERSION, CREATE_DATE, 
       DISABLED)
@@ -34,7 +34,7 @@
       #{disabled,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="org.Ike.Api.map.model.MapProject">
-        insert into map_project
+        insert into ike_map_project
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 ID,
@@ -101,7 +101,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="org.Ike.Api.map.model.MapProject">
-        update map_project
+        update ike_map_project
         <set>
             <if test="projectName != null">
                 PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
@@ -134,7 +134,7 @@
         where ID = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="org.Ike.Api.map.model.MapProject">
-    update map_project
+    update ike_map_project
     set PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
       AREA = #{area,jdbcType=VARCHAR},
       REGION_ID = #{regionId,jdbcType=INTEGER},
@@ -158,12 +158,12 @@
     <select id="getMapProjectByPage" resultMap="ResponseMap">
         select
         <include refid="Base_Column_List"/>
-        from map_project
+        from ike_map_project
         where DISABLED = 0
     </select>
 
     <insert id="createMapProject">
-     insert into map_project (PROJECT_NAME, AREA,
+     insert into ike_map_project (PROJECT_NAME, AREA,
       REGION_ID, REGION_NAME, AREA_AMOUNT,
       PRICE, VERSION, CREATE_DATE,
       DISABLED)
@@ -175,7 +175,7 @@
     <select id="getMapProjectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from map_project
+        from ike_map_project
         where DISABLED = 0
         and PROJECT_NAME = #{projectName}
     </select>

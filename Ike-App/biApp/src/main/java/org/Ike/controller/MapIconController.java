@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * </pre>
  */
 @Controller
-@RequestMapping(value = "icon")
+@RequestMapping(value = "/icon")
 public class MapIconController {
 
     @Autowired

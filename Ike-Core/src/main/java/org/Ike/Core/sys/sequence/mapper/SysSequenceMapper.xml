@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.Ike.Core.sys.sequence.mapper.SysSequenceMapper" >
+  <resultMap id="BaseResultMap" type="org.Ike.Api.sys.model.SysSequence" >
+    <id column="table_name" property="tableName" jdbcType="VARCHAR" />
+    <id column="start_date" property="startDate" jdbcType="DATE" />
+    <result column="next_val" property="nextVal" jdbcType="INTEGER" />
+    <result column="increment" property="increment" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    table_name, start_date, next_val, increment, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="org.Ike.Api.sys.model.SysSequenceKey" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_sequence
+    where table_name = #{tableName,jdbcType=VARCHAR}
+      and start_date = #{startDate,jdbcType=DATE}
+  </select>
+  <insert id="insert" parameterType="org.Ike.Api.sys.model.SysSequence" >
+    insert into sys_sequence (table_name, start_date, next_val,
+      increment, update_time)
+    values (#{tableName,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, #{nextVal,jdbcType=INTEGER},
+      #{increment,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.Ike.Api.sys.model.SysSequence" >
+    insert into sys_sequence
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tableName != null" >
+        table_name,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="nextVal != null" >
+        next_val,
+      </if>
+      <if test="increment != null" >
+        increment,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="nextVal != null" >
+        #{nextVal,jdbcType=INTEGER},
+      </if>
+      <if test="increment != null" >
+        #{increment,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.Ike.Api.sys.model.SysSequence" >
+    update sys_sequence
+    <set >
+      <if test="nextVal != null" >
+        next_val = #{nextVal,jdbcType=INTEGER},
+      </if>
+      <if test="increment != null" >
+        increment = #{increment,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where table_name = #{tableName,jdbcType=VARCHAR}
+      and start_date = #{startDate,jdbcType=DATE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.Ike.Api.sys.model.SysSequence" >
+    update sys_sequence
+    set next_val = #{nextVal,jdbcType=INTEGER},
+      increment = #{increment,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where table_name = #{tableName,jdbcType=VARCHAR}
+      and start_date = #{startDate,jdbcType=DATE}
+  </update>
+
+  <sql id="where_case_sql">
+    <if test="startDateQuery != null">
+      and start_date = #{startDateQuery,jdbcType=VARCHAR}
+    </if>
+    <if test="tableName != null">
+      and table_name = #{tableName,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="querySequence" resultMap="BaseResultMap"
+          parameterType="org.Ike.Api.sys.model.SysSequence">
+    select
+    <include refid="Base_Column_List" />
+    from sys_sequence where 1=1
+    <include refid="where_case_sql"></include>
+  </select>
+</mapper>

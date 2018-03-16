@@ -37,7 +37,6 @@ public class MapProjectServiceImpl implements MapProjectService {
         return mapProjectMapper.getMapProjectByPage(request, page);
     }
 
-    @Override
     public void createMapProject(MapProject project) throws BusinessException {
         try {
             mapProjectMapper.createMapProject(project);
@@ -47,7 +46,6 @@ public class MapProjectServiceImpl implements MapProjectService {
         }
     }
 
-    @Override
     public List<MapProject> getMapProjectByName(String projectName) {
         return mapProjectMapper.getMapProjectByName(projectName);
     }

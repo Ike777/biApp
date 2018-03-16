@@ -45,7 +45,6 @@ public class MapProjectDomainImpl implements MapProjectDomain {
         return page.setRows(list);
     }
 
-    @Override
     public void createMapProject(MapProjectRequest request) throws Exception {
         if (StringUtils.isEmpty(request.getProjectName())) {
             throw new BusinessException("param can not be empty");

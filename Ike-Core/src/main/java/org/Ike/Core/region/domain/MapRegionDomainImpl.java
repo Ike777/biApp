@@ -12,6 +12,7 @@ import org.Ike.Api.region.model.MapRegion;
 import org.Ike.Api.region.model.RegionDict;
 import org.Ike.Api.region.model.RegionPointsVo;
 import org.Ike.Api.region.service.MapRegionService;
+import org.Ike.Api.sys.service.SequenceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -42,6 +43,9 @@ public class MapRegionDomainImpl implements MapRegionDomain {
     @Autowired
     private MapPointsService mapPointsService;
 
+    @Autowired
+    private SequenceService sequenceService;
+
     public Page getMapRegionByPage(MapRegionRequest request, Page page) {
         List<MapRegionResponse> list = null;
         try {
@@ -59,8 +63,7 @@ public class MapRegionDomainImpl implements MapRegionDomain {
 /*        if (StringUtils.isEmpty(mapRegion.getRegionName())) {
             throw new BusinessException("请完善表单信息");
         }*/
-        String code = UUidUtils.generateOrderNo("WX");
-        mapRegion.setRegionCode(code);
+        mapRegion.setRegionCode(sequenceService.generateRegionNo());
         mapRegion.setPopulationSt("XX");//待定
         mapRegion.setSysCreateDate(new Date());
         mapRegion.setVersion(0);
@@ -76,13 +79,12 @@ public class MapRegionDomainImpl implements MapRegionDomain {
 
     }
 
-    @Override
     public List<RegionDict> getRegionDictList() {
         List<RegionDict> list = new ArrayList<RegionDict>();
         List<MapRegion> mapRegionList = mapRegionService.getMapRegionList(new MapRegionRequest());
         for (MapRegion mapRegion : mapRegionList) {
             RegionDict dict = new RegionDict();
-            BeanUtils.copyProperties(mapRegion,dict);
+            BeanUtils.copyProperties(mapRegion, dict);
             list.add(dict);
         }
         return list;

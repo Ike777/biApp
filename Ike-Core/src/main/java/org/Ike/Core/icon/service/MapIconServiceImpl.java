@@ -24,7 +24,6 @@ public class MapIconServiceImpl implements MapIconService {
     @Autowired(required = false)
     private MapIconMapper mapIconMapper;
 
-    @Override
     public List<MapIconResponse> getMapIconByPage(MapIconRequest request, Page page) {
         return mapIconMapper.getMapIconByPage(request, page);
     }

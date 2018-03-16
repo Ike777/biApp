@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * </pre>
  */
 @Controller
-@RequestMapping(value = "map")
+@RequestMapping(value = "/map")
 public class MapProjectController {
 
     @Autowired
