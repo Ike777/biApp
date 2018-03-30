@@ -1,6 +1,6 @@
 //列表column
 var regionColumns = [{
-    checkbox: true
+    radio: true
 }, {
     field: 'regionName',
     title: '区域名称'
@@ -21,6 +21,21 @@ var iconColumns = [{
     field: 'iconName',
     title: '标物名称'
 }, {
-    field:'iconSt',
-    title: '标物类型'
+    field: 'iconSt',
+    title: '标物类型',
+    formatter: function (text) {
+        return switchIconSt(text);
+    }
+}, {
+    field: 'realEstateSt',
+    title: '物业类型',
+    formatter: function (text) {
+        return switchRealSt(text);
+    }
+}, {
+    field: 'apartmentSt',
+    title: '公寓类型',
+    formatter: function (text) {
+        return switchApartSt(text);
+    }
 }];

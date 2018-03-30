@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="">
+
+    <!-- 引入Bootstrap -->
+    <script src="/biApp/js/3rd/jquery3.2.1.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/js/bootstrap.min.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/biApp/js/3rd/bootstrap/css/bootstrap-tab.css">
+    <link href="/biApp/js/3rd/bootstrap/css/bootstrap-cerulen.min.css">
+
+    <script src="/biApp/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/biApp/assets/js/custom.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/js/bootstrap-tab.js"></script>
+
+    <!-- 地图 -->
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=nfuoTEO917xze9Hitfa1Kv4V9Blxan8m"></script>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+
+    <script src="/biApp/views/maps/mapManager.js"></script>
+    <!-- 引入bootstrap-table -->
+    <script src="/biApp/js/3rd/bootstrap/bootstrapTable/bootstrap-table.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/bootstrapTable/bootstrap-table.min.css" rel="stylesheet"/>
+    <script src="/biApp/js/3rd/bootstrap/bootstrapTable/locale/bootstrap-table-zh-CN.js"></script>
+    <!-- 引入bootstrap-select -->
+    <script src="/biApp/js/3rd/bootstrap/select/js/bootstrap-select.min.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/select/js/i18n/defaults-zh_CN.min.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/select/css/bootstrap-select.min.css" rel="stylesheet"/>
+    <!-- messenger -->
+    <script src="/biApp/js/3rd/bootstrap/messenger/js/messenger.min.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/messenger/js/messenger-theme-future.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/messenger/css/messenger.css" rel="stylesheet"/>
+    <link href="/biApp/js/3rd/bootstrap/messenger/css/messenger-theme-future.css" rel="stylesheet"/>
+
+    <!-- 引入公共方法 -->
+    <script src="/biApp/js/service/authService.js"></script>
+    <script src="/biApp/js/service/messageService.js"></script>
+
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        p {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+
+        .panel-body {
+            padding: 5px;
+        }
+    </style>
+
+    <title>地图信息维护</title>
+</head>
+<body>
+
+<div id="searchGroup" class="searchGroupCss">
+    <div class="panel panel-primary" style="height:500px;">
+        <div class="panel-heading">地图项目列表</div>
+        <div class="panel-body">
+            <div id="toolbar" class="btn-group">
+                <button id="btn_map_add" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                </button>
+                <button id="btn_delete" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                </button>
+            </div>
+
+            <table id="tb_departments"></table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="mapAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">新增图标</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row"><!-- start row -->
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label"><b>*</b>项目名称</label>
+                                <input class="form-control" id="projectName" name="projectName" type="text"
+                                       placeholder="项目名称">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label"><b>*</b>区域</label>
+                                <p><select class="form-control" id="region">
+
+                                </select></p>
+                            </div>
+                        </div>
+                    </div><!-- end row -->
+
+                    <div class="row"><!-- start row -->
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label"><b>*</b>区</label>
+                                <input class="form-control" id="area" name="area" type="text" placeholder="区">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label"><b>*</b>占地面积</label>
+                                <input class="form-control" id="areaAmount" name="areaAmount" type="text"
+                                       placeholder="占地面积">
+                            </div>
+                        </div>
+                    </div><!-- end row -->
+
+                    <div class="row"><!-- start row -->
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label"><b>*</b>价格</label>
+                                <input class="form-control" id="price" name="price" type="text" placeholder="价格">
+                            </div>
+                        </div>
+                    </div><!-- end row -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="mapSubmit">保存</button>
+            </div>
+        </div>
+    </div>
+</div><!-- end modal -->
+
+</body>
+
+<script type="text/javascript">
+    $(function () {
+
+        //消息组件初始化
+        Messenger.options = {
+            extraClasses: 'messenger-fixed messenger-on-top messenger-on-right',
+            theme: 'future'
+        };
+
+        //1.初始化Table
+        var mapColumns = [{
+            checkbox: true
+        }, {
+            field: 'projectName',
+            title: '项目名称'
+        }, {
+            field: 'area',
+            title: '区'
+        }, {
+            field: 'regionName',
+            title: '区域名称'
+        }, {
+            field: 'areaAmount',
+            title: '占地面积',
+        }];
+        var mapTable;
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                mapTable = $('#tb_departments').bootstrapTable({
+                    url: '/biApp/map/list.do',         //请求后台的URL（*）
+                    method: 'post',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: false,                     //是否启用排序
+                    sortOrder: "asc",                   //排序方式
+                    smartDisplay: false,
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    //pageSize: 5,                       //每页的记录行数（*）
+                    // pageList: [5, 10, 15],        //可供选择的每页的行数（*）
+                    search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                    strictSearch: false,
+                    showColumns: false,                  //是否显示所有的列
+                    showRefresh: false,                  //是否显示刷新按钮
+                    minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    height: 450,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                    showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
+                    cardView: false,                    //是否显示详细视图
+                    detailView: false,                   //是否显示父子表
+                    columns: mapColumns
+                });
+            };
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    pageSize: params.pageSize,
+                    pageNumber: params.pageNumber
+                };
+                return temp;
+            };
+            return oTableInit;
+        }().Init();
+
+        SysService.doPost({}, "/region/regions.do", function (res) {
+            $.each(res, function (i, n) {
+                $('#region').append("<option value='" + n.id + "'>" + n.regionName + "</option>");
+            });
+        });
+
+        $('.selectpicker').selectpicker({
+            style: 'btn-info',
+            size: 5
+        });
+
+        $('#btn_map_add').bind('click', function () {
+            $('#mapAddModal').modal('show');
+        });
+
+        $('#mapSubmit').click(function () {
+            var projectName = $('#projectName').val();
+            if (!projectName) {
+                Mes.show('请输入项目名称');
+                return;
+            }
+            var area = $('#area').val();
+            var areaAmount = $('#areaAmount').val();
+            var price = $('#price').val();
+            var regionId = $('#region').val();
+            var regionName = $('#region').find('option:selected').text();
+            if (!regionId || !regionName) {
+                Mes.show('请选择区域');
+                return;
+            }
+            var data = {
+                "projectName": projectName,
+                "area": area,
+                "areaAmount": areaAmount,
+                "price": price,
+                "regionId": regionId,
+                "regionName": regionName
+            };
+            SysService.doPost(data, "/map/createMapProject.do", function (res) {
+                Mes.show('保存成功');
+                $('#mapAddModal').modal('hide');
+                $('#tb_departments').bootstrapTable('refresh');
+            });
+        });
+    });
+</script>
+</html>
+

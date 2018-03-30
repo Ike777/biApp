@@ -15,9 +15,14 @@
         ID, CODE, VALUE, PARENT, COMMENTS, DISABLED, CREATE_DATE, VERSION
     </sql>
 
+
+    <sql id="Select_Column_List" >
+        DCT.ID, DCT.CODE, DCT.VALUE, DCT.PARENT, DCT.COMMENTS, DCT.DISABLED, DCT.CREATE_DATE, DCT.VERSION,S.ID,S.CODE
+    </sql>
+
     <select id="selectByParentCode" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List" />
-        FROM SYS_DICT a, SYS_DICT DCT WHERE a.DCTID = DCT.DCTPARENT AND a.CODE = #{parentCode,jdbcType=VARCHAR} ORDER BY DCT.CODE ASC
+        select <include refid="Select_Column_List" />
+        FROM SYS_DICT S, SYS_DICT DCT WHERE S.ID = DCT.PARENT AND S.CODE = #{parentCode,jdbcType=VARCHAR} ORDER BY DCT.CODE ASC
     </select>
 
 </mapper>

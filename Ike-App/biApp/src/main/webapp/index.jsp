@@ -4,7 +4,7 @@
 
 <meta content="always" name="referrer">
 <meta name="theme-color" content="#2932e1">
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -16,5 +16,10 @@
 <a  href="./main.html" >主页</a><br>
 <a  href="./main2.html" >主页2</a><br>
 <a  href="./ace.html" >ace</a><br>
+
+<a  href="./views/maps/regionList.html" >regionList</a><br>
+<a  href="./views/maps/mapManager.html" >mapManager</a><br>
+<a  href="./views/maps/mapProject.html" >mapProject</a><br>
+
 </body>
 </html>

@@ -3,6 +3,8 @@ package org.Ike.Api.icon.domain;
 import com.system.mybatis.Page;
 import com.system.request.MapIconRequest;
 
+import java.util.List;
+
 /**
  * <pre>
  * Author: taixiaomin
@@ -20,4 +22,11 @@ public interface MapIconDomain {
      * @return
      */
     Page getMapIconByPage(MapIconRequest request, Page page);
+
+    /**
+     * 文件上传
+     *
+     * @param importList
+     */
+    void importMapIconByExcel(List<List<Object>> importList) throws Exception;
 }

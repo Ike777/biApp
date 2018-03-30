@@ -9,12 +9,25 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="">
 
-
+    <script src="/biApp/js/3rd/jquery3.2.1.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/js/bootstrap.min.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src="/biApp/views/maps/mapManager.js"></script>
     <!-- 引入bootstrap-table -->
     <script src="/biApp/js/3rd/bootstrap/bootstrapTable/bootstrap-table.js"></script>
     <link href="/biApp/js/3rd/bootstrap/bootstrapTable/bootstrap-table.min.css" rel="stylesheet"/>
     <script src="/biApp/js/3rd/bootstrap/bootstrapTable/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/messenger/js/messenger.min.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/messenger/js/messenger-theme-future.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/messenger/css/messenger.css" rel="stylesheet"/>
+    <link href="/biApp/js/3rd/bootstrap/messenger/css/messenger-theme-future.css" rel="stylesheet"/>
+    <!-- 引入公共方法 -->
+    <script src="/biApp/js/service/authService.js"></script>
+    <script src="/biApp/js/service/messageService.js"></script>
+    <script src="/biApp/js/service/selectService.js"></script>
+
+    <script src="/biApp/js/jquery-ui.min.js"></script>
+    <script src="/biApp/js/common.js"></script>
 
     <style type="text/css">
         body, html {
@@ -44,28 +57,98 @@
         <div class="panel-heading">区域列表</div>
         <div class="panel-body">
             <div id="region_toolbar" class="btn-group">
-                <button id="btn_region_add" type="button" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                <!-- <button id="btn_region_add" type="button" class="btn btn-primary">
+                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                 </button>
+                 <button id="btn_edit" type="button" class="btn btn-primary">
+                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+                 </button>
+                 <button id="btn_delete" type="button" class="btn btn-primary">
+                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                 </button>-->
+                <button id="btn_import" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-import" aria-hidden="true"></span>数据导入
                 </button>
-                <button id="btn_edit" type="button" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+                <button id="btn_export" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-export" aria-hidden="true"></span>数据导出
                 </button>
-                <button id="btn_delete" type="button" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-                </button>
+            </div>
+            <div>
+                <form id="data-search-form">
+
+                </form>
             </div>
             <table id="tb_region"></table>
             <table id="tb_icon"></table>
         </div>
     </div>
 </div>
+<div id="uploadModal" class="modal fade" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog" style="width: 520px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" id="title">导入文件</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal validation" id="test-data-import-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-md-1"></label>
+                        <input type="file" name="upfile" class="hidden"
+                               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                        <div class="col-md-8 fileBox"
+                             style="border:1px solid #ccc;height:34px;line-height: 34px;color: #ccc;">点击预览,选择要导入的文件
+                        </div>
+                        <a class="view btn">预览</a>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1"></label>
+                        <a href="" id="downExcel">下载模板</a>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline sbold" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-outline sbold lead" id="importExcelBtn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="rangeModal" class="modal fade" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog" style="width: 520px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div id="progressbar">
+                    <div class="progress-label">加载...</div>
+                </div>
+                <div class="msgContainer hidden" style="min-height: 100px;">
+
+                </div>
+                <iframe name="myIframe" id="myIframe" class="hidden" style="width: 100%;margin-top: 15px;"></iframe>
+                <script type="text/javascript">
+
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 
 <script type="text/javascript">
     $(function () {
+        //消息组件初始化
+        Messenger.options = {
+            extraClasses: 'messenger-fixed messenger-on-top messenger-on-right',
+            theme: 'future'
+        };
         var RegionTableInit = function () {
             var oTableInit = new Object();
-            //初始化Table
             oTableInit.Init = function () {
                 $('#tb_region').bootstrapTable({
                     url: '/biApp/region/list.do',         //请求后台的URL（*）
@@ -94,10 +177,10 @@
                     cardView: false,                    //是否显示详细视图
                     detailView: false,                   //是否显示父子表
                     columns: regionColumns,
-                    onClickRow:function (row,$element,field) {
-                        $('#tb_icon').bootstrapTable('refresh',{
-                            query:{
-                                "regionId":row.id
+                    onClickRow: function (row, $element, field) {
+                        $('#tb_icon').bootstrapTable('refresh', {
+                            query: {
+                                "regionId": row.id
                             }
                         });
                     }
@@ -105,7 +188,7 @@
             };
             //得到查询的参数
             oTableInit.queryParams = function (params) {
-                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                var temp = {
                     pageSize: params.pageSize,
                     pageNumber: params.pageNumber
                 };
@@ -157,6 +240,98 @@
             };
             return oTableInit;
         }().Init();
+
+
+        $("#btn_import").bind("click", function () {
+            $("#uploadModal").modal();
+        });
+
+        $('.fileBox,.view').click(function () {
+            $('input[name=upfile]').trigger('click')
+        });
+
+        $('input[name=upfile]').change(function () {
+            $('.fileBox').text($(this).val())
+        });
+
+        $('#importExcelBtn').click(function () {
+            var $form = $('#test-data-import-form');
+            $form.attr("action", ctx + "sys/import.do");
+            $form.attr("method", "post");
+            $form.attr('target', 'myIframe');
+            $form.submit();
+
+            $('#uploadModal').modal('hide');
+
+            $('#uploadModal .fileBox').html('');
+            $('#uploadModal input[name=upfile]').val('');
+            $('#rangeModal .msgContainer').html('');
+            $('#rangeModal').modal('show');
+            getRange();
+        });
+
+        //进度条
+        function getRange() {
+            var progressbar = $("#progressbar"),
+                progressLabel = $(".progress-label");
+
+            progressbar.progressbar({
+                value: '0',
+                change: function () {
+                    progressLabel.text(progressbar.progressbar("value") + "%");
+                },
+                complete: function () {
+                    progressLabel.text("完成！");
+                }
+            });
+
+            function progress() {
+                var val = progressbar.progressbar("value") || 0;
+
+                progressbar.progressbar("value", val + 1);
+
+                if (val < 99) {
+                    setTimeout(progress, 5);
+                }
+            }
+
+            setTimeout(progress, 1000);
+
+            function showIframe() {
+                var stringHtml = $(document.getElementById('myIframe').contentWindow.document.body).html();
+                var xStart = stringHtml.indexOf("message") + 10;
+                var xEnd = stringHtml.indexOf("</pre>") - 2;
+                var msgHtml = stringHtml.substring(xStart, xEnd);
+                var msgArray = msgHtml.split("\\n");
+                var shtml = '';
+                $.each(msgArray, function (i, item) {
+                    shtml += "<p>" + item + "</p>"
+                });
+                $('.msgContainer').append(shtml).removeClass('hidden');
+                //var codeNum = stringHtml.substring(stringHtml.indexOf("code") + 7, stringHtml.indexOf("msg") - 3);
+            }
+            setTimeout(showIframe, 2000);
+        };
+
+        downExcelTemp();
+
+        function downExcelTemp() {
+            $.ajax({
+                type: 'POST',
+                url: ctx + "sys/getTemplate.do",
+                data: {},
+                success: function (res) {
+                    $('#downExcel').attr('href', res)
+                }
+            })
+        }
+
+        $("#btn_export").click(function () {
+            var $form = $('#data-search-form');
+            $form.attr("action",ctx + "/sys/export.do");
+            $form.attr("method","post");
+            $form.submit();
+        });
 
     });
 </script>

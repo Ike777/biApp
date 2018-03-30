@@ -1,6 +1,5 @@
 package com.system.file;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -189,21 +188,14 @@ public class ExcelImport {
         // }
         // }
         // }
-
-        ExcelImport re = new ExcelImport(new FileInputStream(new File("D://1230.xlsx")));
+        String path = "E:\\dataTemp.xlsx";
+        ExcelImport re = new ExcelImport(new FileInputStream(new File(path)),true);
         List<Map<String, String>> list = re.getSheetMap(0);
         StringBuilder data = new StringBuilder();
         for (Map<String, String> map : list) {
-            String idcard = map.get("IDCARD_");
-            if (idcard.length() >= 18) {
-                //data += idcard.substring(0, 6) + idcard.substring(8, 17) + "\r\n";
-                data.append(idcard.substring(0, 6) + idcard.substring(8, 17) + "\r\n");
-            } else {
-                //data += idcard + "\r\n";
-                data.append(idcard + "\r\n");
-            }
+            System.out.println(map);
         }
 
-        FileUtils.writeStringToFile(new File("D:/1.txt"), data.toString());
+        //FileUtils.writeStringToFile(new File("D:/1.txt"), data.toString());
     }
 }

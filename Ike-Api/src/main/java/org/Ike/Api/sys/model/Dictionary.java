@@ -21,7 +21,7 @@ public class Dictionary {
     /**
      * 描述
      */
-    private String comment;
+    private String comments;
 
     /**
      * 父级ID
@@ -31,7 +31,7 @@ public class Dictionary {
     /**
      * 系统创建时间
      */
-    private Date sysCreateDate;
+    private Date createDate;
 
     /**
      * 记录的版本 乐观锁
@@ -73,18 +73,15 @@ public class Dictionary {
         this.value = value == null ? null : value.trim();
     }
 
-    
-    
-    public String getComment() {
-        return comment;
+
+    public String getComments() {
+        return comments;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
-    
-    
     public Integer getParent() {
         return parent;
     }
@@ -93,18 +90,15 @@ public class Dictionary {
         this.parent = parent;
     }
 
-    
-    
-    public Date getSysCreateDate() {
-        return sysCreateDate;
+
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setSysCreateDate(Date sysCreateDate) {
-        this.sysCreateDate = sysCreateDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    
-    
     public Integer getVersion() {
         return version;
     }

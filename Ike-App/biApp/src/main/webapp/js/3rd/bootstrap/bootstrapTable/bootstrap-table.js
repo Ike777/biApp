@@ -301,7 +301,7 @@
         queryParams: function (params) {
             return params;
         },
-        queryParamsType: 'limit', // undefined
+        queryParamsType: 'undefined', // undefined limit  使用pageNumber
         responseHandler: function (res) {
             return res;
         },
@@ -2354,8 +2354,8 @@
         if (this.options.showHeader && this.options.height) {
             this.$tableHeader.show();
             //TODO 注释本行行表示 表头和内容对齐
-            this.resetHeader();
-            padding += this.$header.outerHeight();
+            //this.resetHeader();
+            //padding += this.$header.outerHeight();
         } else {
             this.$tableHeader.hide();
             this.trigger('post-header');

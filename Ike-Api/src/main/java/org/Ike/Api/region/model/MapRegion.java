@@ -1,5 +1,8 @@
 package org.Ike.Api.region.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.system.json.JsonDateDeserializer;
+
 import java.util.Date;
 
 public class MapRegion {
@@ -26,6 +29,7 @@ public class MapRegion {
     /**
      * yyyy-MM-dd 成立时间 手填
      */
+    @JsonDeserialize(using = com.system.json.JsonDateDeserializer.class )
     private Date createDate;
 
     /**

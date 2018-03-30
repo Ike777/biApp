@@ -1,34 +1,44 @@
 package org.Ike.controller.auth;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.system.exception.BusinessException;
+import org.Ike.Api.sys.model.AscResponse;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.system.JsonResponse;
-
 @Controller
-@RequestMapping ( "/auth")
+@RequestMapping("/auth")
 public class AuthController {
-	
-	@RequestMapping("/login.do")  // 请求url地址映射，类似Struts的action-mapping
-    public @ResponseBody JsonResponse  testLogin(@RequestParam(value="username",required=false)String username, String password, HttpServletRequest request) {
-		JsonResponse res = new JsonResponse();
-		res.setData("success");
-        return res;
-    }
-	
-	@RequestMapping("/demo.do") 
-    public @ResponseBody Map<String, String> getMap() { 
-        Map<String, String> map = new HashMap<String, String>(); 
-        map.put("key1", "value-1"); 
-        map.put("key2", "value-2"); 
-        return map; 
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
+    @RequestMapping("/login.do")
+    @ResponseBody
+    public AscResponse login(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
+        AscResponse result = new AscResponse();
+        result.setSuccess(false);
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            subject.login(token);
+            result.setSuccess(true);
+            result.setMessage("登录成功");
+        } catch (AuthenticationException ex) {
+            if (ex.getCause() instanceof BusinessException) {
+                result.setMessage(ex.getCause().getMessage());
+            }
+        } catch (Exception ex1) {
+            logger.error(ex1.getMessage(), ex1);
+            result.setMessage("服务器错误，请稍候再试");
+        }
+        return result;
     }
 
 }

@@ -175,6 +175,7 @@
     <include refid="Base_Column_List" />
     from IKE_MAP_REGION
     where DISABLED = 0
+    ORDER BY SYS_CREATE_DATE DESC
   </select>
 
   <select id="getMapRegionList" resultMap="BaseResultMap">
@@ -182,7 +183,6 @@
     <include refid="Base_Column_List" />
     from IKE_MAP_REGION
     where DISABLED = 0
-    <!--<if test=""></if>-->
   </select>
 
 

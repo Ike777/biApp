@@ -1,634 +1,658 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="">
-	
-	
-	
-	<!-- 引入Bootstrap -->
-	<script src="/biApp/js/3rd/jquery3.2.1.js"></script>
-	<script src="/biApp/js/3rd/bootstrap/js/bootstrap.min.js"></script>
-	<link href="/biApp/js/3rd/bootstrap/css/bootstrap.css" rel="stylesheet">
-	<link href="/biApp/js/3rd/bootstrap/css/bootstrap-tab.css" >
-	<link href="/biApp/js/3rd/bootstrap/css/bootstrap-cerulen.min.css" >
-	
-	<script src="/biApp/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="/biApp/assets/js/custom.js"></script>
-	<script src="/biApp/js/3rd/bootstrap/js/bootstrap-tab.js"></script>
-	
-	<!-- 地图 -->
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nfuoTEO917xze9Hitfa1Kv4V9Blxan8m"></script> 
-	<script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
-		
-	<script src="/biApp/views/maps/mapManager.js"></script>
-	<!-- 引入bootstrap-table -->
-	<script src="/biApp/js/3rd/bootstrap/bootstrapTable/bootstrap-table.min.js"></script>
-	<link href="/biApp/js/3rd/bootstrap/bootstrapTable/bootstrap-table.min.css" rel="stylesheet" />
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="">
+
+    <!-- 引入Bootstrap -->
+    <script src="/biApp/js/3rd/jquery3.2.1.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/js/bootstrap.min.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- jquery validate-->
+    <link href="/biApp/js/validate_jquery/validationEngine.jquery.css" rel="stylesheet"/>
+    <script src="/biApp/js/validate_jquery/jquery.validationEngine-zh_CN.js"></script>
+    <script src="/biApp/js/validate_jquery/jquery.validationEngine.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/css/bootstrap-tab.css">
+    <link href="/biApp/js/3rd/bootstrap/css/bootstrap-cerulen.min.css">
+    <script src="/biApp/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/biApp/assets/js/custom.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/js/bootstrap-tab.js"></script>
+    <!-- 地图 -->
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=nfuoTEO917xze9Hitfa1Kv4V9Blxan8m"></script>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+
+    <script src="/biApp/views/maps/mapManager.js"></script>
+    <!-- 引入bootstrap-table -->
+    <script src="/biApp/js/3rd/bootstrap/bootstrapTable/bootstrap-table.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/bootstrapTable/bootstrap-table.min.css" rel="stylesheet"/>
     <script src="/biApp/js/3rd/bootstrap/bootstrapTable/locale/bootstrap-table-zh-CN.js"></script>
-	<!-- 引入bootstrap-select -->
-	<script src="/biApp/js/3rd/bootstrap/select/js/bootstrap-select.min.js"></script>
-	<script src="/biApp/js/3rd/bootstrap/select/js/i18n/defaults-zh_CN.min.js"></script>
-	<link href="/biApp/js/3rd/bootstrap/select/css/bootstrap-select.min.css" rel="stylesheet" />
-	<!-- messenger -->
-	<script src="/biApp/js/3rd/bootstrap/messenger/js/messenger.min.js"></script>
-	<script src="/biApp/js/3rd/bootstrap/messenger/js/messenger-theme-future.js"></script>
-	<link href="/biApp/js/3rd/bootstrap/messenger/css/messenger.css" rel="stylesheet" />
-	<link href="/biApp/js/3rd/bootstrap/messenger/css/messenger-theme-future.css" rel="stylesheet" />
-	
-	<!-- 引入公共方法 -->
-	<script src="/biApp/js/service/authService.js"></script>
-	<script src="/biApp/js/service/messageService.js"></script>
-	
-	<style type="text/css">
-		body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
-		#regionManagerMap{width:70%;height:700px;margin-left:400px;margin-top:-480px;}
-		p{margin-left:5px; font-size:14px;}
-		
-		.restaurant1 {
-		    background-position: -291px 0;
-		}
-		
-		.itemListCss{
-			margin-left:400px;
-			padding-top:10px;
-		}
-		
-		.addWidth{
-			width:80% !important;
-		}
-		
-		.searchGroupCss{
-			width:380px;
-			margin-top:10px;
-			margin-left:10px;
-		}
-		
-		.marginTop{
-			margin-top:10px;
-		}
-		
-		.panel-body {
-		    padding: 5px;
-		}
-		
-	</style>
-	
-	<title>地图信息维护</title>
+    <!-- 引入bootstrap-select -->
+    <script src="/biApp/js/3rd/bootstrap/select/js/bootstrap-select.min.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/select/js/i18n/defaults-zh_CN.min.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/select/css/bootstrap-select.min.css" rel="stylesheet"/>
+    <!-- messenger -->
+    <script src="/biApp/js/3rd/bootstrap/messenger/js/messenger.min.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/messenger/js/messenger-theme-future.js"></script>
+    <link href="/biApp/js/3rd/bootstrap/messenger/css/messenger.css" rel="stylesheet"/>
+    <link href="/biApp/js/3rd/bootstrap/messenger/css/messenger-theme-future.css" rel="stylesheet"/>
+
+
+    <!-- bootstrap-datepicker-->
+    <script src="/biApp/js/3rd/bootstrap/datepicker/bootstrap-datepicker.js"></script>
+    <script src="/biApp/js/3rd/bootstrap/datepicker/bootstrap-datepicker.zh-CN.js"></script>
+
+
+    <!-- 引入公共方法 -->
+    <script src="/biApp/js/service/authService.js"></script>
+    <script src="/biApp/js/service/messageService.js"></script>
+    <script src="/biApp/js/service/selectService.js"></script>
+    <script src="/biApp/js/common.js"></script>
+
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        .searchGroupCss {
+            width: 500px;
+            height: 700px;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        #regionManagerMap {
+            width: 70%;
+            height: 700px;
+            margin-left: 550px;
+            margin-top: -650px;
+        }
+
+        p {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+
+        /**
+                .restaurant1 {
+                    background-position: -291px 0;
+                }
+
+                .itemListCss {
+                    margin-left: 400px;
+                    padding-top: 10px;
+                }
+
+                .addWidth {
+                    width: 80% !important;
+                }
+
+                .marginTop {
+                    margin-top: 10px;
+                }
+
+                .panel-body {
+                    padding: 5px;
+                }
+        **/
+    </style>
+
+    <title>地图信息维护</title>
 </head>
 <body>
-	
-	<div id="searchGroup" class="searchGroupCss">
-		<div class="panel panel-primary" style="height:500px;">
-		  	<div class="panel-heading">区域列表</div>
-		  	
-		  	<div class="panel-body" >
-			  	<div id="toolbar" class="btn-group" >
-	            <button id="btn_add" type="button" class="btn btn-primary">
-	                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>选点
-	            </button>
-	            <button id="addIcon" type="button" class="btn btn-primary">
-	                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增标物
-	            </button>
-	            <button id="btn_delete" type="button" class="btn btn-primary">
-	                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-	            </button>
-	        </div>
-	        
-		  	<table id="tb_departments"></table>
-		   </div>
-		  </div>
-		</div>
+<div id="searchGroup" class="searchGroupCss">
+    <div class="panel panel-primary" style="height:600px;">
+        <div class="panel-heading">区域列表</div>
 
-	
+        <div class="panel-body">
+            <div id="toolbar" class="btn-group">
+                <button id="btn_add" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>选点
+                </button>
+                <button id="addIcon" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增标物
+                </button>
+                <button id="btn_delete" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                </button>
+            </div>
+            <table id="tb_departments"></table>
+        </div>
+    </div>
+</div>
 
-	<div id="regionManagerMap" style=""></div>
-	<div id="mapBar" class="btn-group" style="margin-left: 400px;margin-top: -1460px;">
-		<button id="closeDraw" type="button" class="btn btn-primary" >
-		      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>选点结束
-		 </button>
-		 
-		 <button id="btn_add" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#regionEditModal">
-		      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑
-		 </button>
-		 
-		 <button id="btn_add" type="button" class="btn btn-primary" >
-		      <span class="glyphicon glyphicon-save" aria-hidden="true"></span>保存
-		 </button>
-		 
-		 <button id="editIcon" type="button" class="btn btn-primary" >
-		      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>新增图标
-		 </button>
-	 </div>
-	 
-	<div id="itemList" class="itemListCss">
-		<span class="label label-primary">周边信息</span>
-		<span class="label label-primary">区域信息</span>
-	</div>
-	
-	
-	<!--Region Edit Modal -->
+
+<div id="regionManagerMap" style=""></div>
+<div id="mapBar" class="btn-group" style="margin-left: 600px;margin-top: -1460px;">
+    <button id="closeDraw" type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>选点结束
+    </button>
+
+    <button id="btn_edit" type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑
+    </button>
+
+    <!--   <button id="editIcon" type="button" class="btn btn-primary">
+           <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>新增图标
+       </button>-->
+</div>
+
+<!--<div id="itemList" class="itemListCss">
+    <span class="label label-primary">周边信息</span>
+    <span class="label label-primary">区域信息</span>
+</div>-->
+
+
+<!--Region Edit Modal -->
 <div class="modal fade" id="regionEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">新增区域</h4>
-      </div>
-      <div class="modal-body">
-       	<div class="container">
-       	
-		 <div class="row"><!-- start row -->
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-							<label class="control-label"><b>*</b>区域名</label>
-							<p>
-								<input id="regionName"  class="form-control "/>
-							</p>
-						</div>
-		 	</div>
-		 	
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-							<label class="control-label"><b>*</b>区域码</label>
-							<p>
-								<input id="regionCode"  class="form-control "/>
-							</p>
-						</div>
-		 	</div>
-		 	
-		 </div><!-- end row -->
-		 
-		 <div class="row"><!-- start row -->
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-							<label class="control-label"><b>*</b>成立时间</label>
-							<p>
-								<input id="createDate"  class="form-control "/>
-							</p>
-						</div>
-		 	</div>
-		 	
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-							<label class="control-label"><b>*</b>均价</label>
-							<p>
-								<input id="price"  class="form-control "/>
-							</p>
-						</div>
-		 	</div>
-		 	
-		 </div><!-- end row -->
-		 
-		 <div class="row"><!-- start row -->
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-					<label class="control-label"><b>*</b>最高价</label>
-					<p>
-						<input id="topPrice"  class="form-control "/>
-					</p>
-				</div>
-		 	</div>
-		 	
-		 	
-		 </div><!-- end row -->
-		 
-		 <div class="row"><!-- start row -->
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-							<label class="control-label"><b>*</b>成熟度</label>
-							<p>
-								<select class="selectpicker" id="levelSt">
-								  <option>起步</option>
-								  <option>成长</option>
-								  <option>成熟</option>
-								</select>
-							</p>
-						</div>
-		 	</div>
-		 	
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-							<label class="control-label"><b>*</b>人口密度</label>
-							<p>
-								<select class="selectpicker" id="populationSt">
-								  <option>繁华</option>
-								  <option>一般</option>
-								</select>
-							</p>
-						</div>
-		 	</div>
-		 	
-		 </div><!-- end row -->
-		 
-		</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" id="regionSubmit">保存</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">新增区域</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form id="regionDiaForm">
+                        <div class="row"><!-- start row -->
+                            <div class="col-sm-3">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label"><b>*</b>区域名</label>
+                                    <p>
+                                        <input id="regionName" class="form-control validate[required]"
+                                               placeholder="区域名称"/>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label"><b>*</b>成立时间</label>
+                                    <p>
+                                        <input id="createDate" class="form-control validate[required]" readonly/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- end row -->
+
+                        <div class="row"><!-- start row -->
+                            <div class="col-sm-3">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label"><b>*</b>均价</label>
+                                    <p>
+                                        <input id="price" class="validate[required] form-control" placeholder="区域均价"/>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label"><b>*</b>最高价</label>
+                                    <p>
+                                        <input id="topPrice" class="form-control validate[required]"
+                                               placeholder="区域最高价"/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- end row -->
+
+                        <div class="row"><!-- start row -->
+                            <div class="col-sm-3">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label"><b>*</b>成熟度</label>
+                                    <p>
+                                        <select class="selectpicker validate[required]" id="levelSt">
+                                            <!--<option>起步</option>
+                                            <option>成长</option>
+                                            <option>成熟</option>-->
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label"><b>*</b>人口密度</label>
+                                    <p>
+                                        <select class="selectpicker validate[required]" id="populationSt">
+                                           <!-- <option>繁华</option>
+                                            <option>一般</option>-->
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div><!-- end row -->
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="regionSubmit">保存</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div><!-- end modal -->
-	
-	
-	
-	<!--Region Edit Modal -->
+
+
+<!--Region Edit Modal -->
 <div class="modal fade" id="iconEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">新增图标</h4>
-      </div>
-      <div class="modal-body">
-       	<div class="container">
-	 
-		 <div class="row"><!-- start row -->
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-							<label class="control-label"><b>*</b>标物类型</label>
-							<p>
-								<select class="selectpicker" id="iconSt">
-								  <option>学校</option>
-								  <option>商场</option>
-								  <option>医院</option>
-								  <option>产业园</option>
-								  <option>企业</option>
-								  <option>物业</option>
-								  <option>交通站点</option>
-								</select>
-							</p>
-						</div>
-		 	</div>
-		 	
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-							<label class="control-label"><b>*</b>物业类型</label>
-							<p>
-								<select class="selectpicker" id="realEstateSt">
-								  <option>住宅</option>
-								  <option>商业</option>
-								  <option>办公</option>
-								  <option>公寓</option>
-								</select>
-							</p>
-						</div>
-		 	</div>
-		 	
-		 </div><!-- end row -->
-		 
-		  <div class="row"><!-- start row -->
-		 	<div class="col-sm-3">
-		 		<div class="form-group form-group-sm">
-							<label class="control-label"><b>*</b>公寓类型</label>
-							<p>
-								<select class="selectpicker" id="apartmentSt">
-								  <option>普通住宅</option>
-								  <option>洋房</option>
-								  <option>别墅</option>
-								</select>
-							</p>
-						</div>
-		 	</div>
-		 	
-		 	
-		 </div><!-- end row -->
-		 
-		</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" id="iconSubmit">保存</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">新增图标</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+
+                    <div class="row"><!-- start row -->
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label"><b>*</b>标物类型</label>
+                                <p>
+                                    <select class="selectpicker" id="iconSt">
+<!--                                        <option>学校</option>
+                                        <option>商场</option>
+                                        <option>医院</option>
+                                        <option>产业园</option>
+                                        <option>企业</option>
+                                        <option>物业</option>
+                                        <option>交通站点</option>-->
+                                    </select>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label"><b>*</b>物业类型</label>
+                                <p>
+                                    <select class="selectpicker" id="realEstateSt">
+       <!--                                 <option>住宅</option>
+                                        <option>商业</option>
+                                        <option>办公</option>
+                                        <option>公寓</option>-->
+                                    </select>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div><!-- end row -->
+
+                    <div class="row"><!-- start row -->
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label"><b>*</b>公寓类型</label>
+                                <p>
+                                    <select class="selectpicker" id="apartmentSt">
+                                  <!--      <option>普通住宅</option>
+                                        <option>洋房</option>
+                                        <option>别墅</option>-->
+                                    </select>
+                                </p>
+                            </div>
+                        </div>
+
+
+                    </div><!-- end row -->
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="iconSubmit">保存</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div><!-- end modal -->
-	
+
 </body>
 
 <script type="text/javascript">
-		
-		
-		$(function () {
-			var points = [];
-			var markers = [];
-			var regionObj ={};
-			var tmpIcon = {};
-			
-			//消息组件初始化
-			Messenger.options = {
-	    		    extraClasses: 'messenger-fixed messenger-on-top messenger-on-right',
-	    		    theme: 'future'
-	    		};
-			
-		 // 百度地图API功能
-			var map = new BMap.Map("regionManagerMap");
-			map.addControl(new BMap.NavigationControl());// 添加平移缩放控件
-			map.addControl(new BMap.ScaleControl()); // 添加比例尺控件
-			map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
-			map.enableScrollWheelZoom();   //启用滚轮放大缩小
-			map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
-			
-			map.setMapStyle({style:'midnight'});//风格 深蓝
-			//map.setMapStyle({style:'light'}); //淡蓝
-			
-			
-			var point = new BMap.Point(120.33, 31.61);
-			map.centerAndZoom(point, 15);
-			
-			//创建地图标物
-			var pt = new BMap.Point(120.33, 31.61);
-			var myIcon = new BMap.Icon("/biApp/css/map/mapIcon1.png", new BMap.Size(37,37),{'imageOffset':new BMap.Size(-291,0)});
-			var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
-			
-			marker2.addEventListener("click",attribute);
-			
-			
-			map.addOverlay(marker2);              // 将标注添加到地图中
-			
-			
-			
-			//加载选择框
-			$('.selectpicker').selectpicker({
-			  style: 'btn-info',
-			  size: 5
-			});
-
-			
-			
-			
-			function attribute(){
-				var p = marker2.getPosition();  //获取marker的位置
-				alert("位置是" + p.lng + "," + p.lat);    
-			}
-			
-
-		    //1.初始化Table
-		    //列表column
-			var regionColumns =  [{
-			    checkbox: true
-			}, {
-			    field: 'regionName',
-			    title: '区域名称'
-			}, {
-			    field: 'regionCode',
-			    title: '区域码'
-			}, {
-			    field: 'levelSt',
-			    title: '成熟度',
-			    formater:function(text){
-			    	return text;
-			    }
-			}, {
-			    field: 'price',
-			    title: '均价'
-			}, ];
-		    var regionTable;
-		    var TableInit = function () {
-		    	console.log('111');
-		        var oTableInit = new Object();
-		        //初始化Table
-		        oTableInit.Init = function () {
-		        	regionTable = $('#tb_departments').bootstrapTable({
-		                url: '/biApp/region/list.do',         //请求后台的URL（*）
-		                method: 'post',                      //请求方式（*）
-		               toolbar: '#toolbar',                //工具按钮用哪个容器
-		                striped: true,                      //是否显示行间隔色
-		                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-		                pagination: false,                   //是否显示分页（*）
-		                sortable: false,                     //是否启用排序
-		                sortOrder: "asc",                   //排序方式
-		                queryParams: oTableInit.queryParams,//传递参数（*）
-		                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
-		                pageNumber:1,                       //初始化加载第一页，默认第一页
-		                //pageSize: 5,                       //每页的记录行数（*）
-		               // pageList: [5, 10, 15],        //可供选择的每页的行数（*）
-		                search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
-		                strictSearch: false,
-		                showColumns: false,                  //是否显示所有的列
-		                showRefresh: false,                  //是否显示刷新按钮
-		                minimumCountColumns: 2,             //最少允许的列数
-		                clickToSelect: true,                //是否启用点击选中行
-		                height: 450,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-		                uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
-		                showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
-		                cardView: false,                    //是否显示详细视图
-		                detailView: false,                   //是否显示父子表
-		                columns:regionColumns
-		            });
-		        };
-
-		        //得到查询的参数
-		        oTableInit.queryParams = function (params) {
-		            var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-		                limit: params.limit,   //页面大小
-		                offset: params.offset,  //页码
-		                departmentname: $("#txt_search_departmentname").val(),
-		                statu: $("#txt_search_statu").val()
-		            };
-		            return temp;
-		        };
-		        
-		        
-		        return oTableInit;
-		    }().Init();
 
 
-		    /* var ButtonInit = function () {
-		        var oInit = new Object();
-		        var postdata = {};
+    $(function () {
+        //init
+        var points = [];
+        var markers = [];
+        var regionObj = {};
+        var tmpIcon = {};
+        $('#mapBar').hide();
+        $('#iconBar').hide();
 
-		        oInit.Init = function () {
-		        };
+        //************************* plugin start *************************/
+        //消息组件初始化
+        Messenger.options = {
+            extraClasses: 'messenger-fixed messenger-on-top messenger-on-right',
+            theme: 'future'
+        };
 
-		        return oInit;
-		    }().Init(); */
-		    
-		    //绑定页面事件
-		    $('#mapBar').hide();
-		    $('#iconBar').hide();
-		    
-		  //************************* region start *************************/
-		    $('#btn_add').bind('click',function(){
-		    	//绑定地图选点
-		    	map.addEventListener("click", drawItem);
-		    	
-		    	cleanTempData();
-		    	//显示功能栏
-		    	$('#mapBar').show();
-		    });
-		    
-		    //选点结束
-		    $('#closeDraw').bind('click',function(){
-		    	createPol(map);
-		    });
-		    
-		    
-		    //提交Region
-		    $('#regionSubmit').bind('click',function(){
-		    	var newRegion = {};
-		    	newRegion.regionName=$('#regionName').val();
-		    	newRegion.regionCode=$('#regionCode').val();
-		    	newRegion.createDate=$('#createDate').val();
-		    	newRegion.price=$('#price').val();
-		    	newRegion.topPrice=$('#topPrice').val();
-		    	newRegion.levelSt=$('#levelSt').val();
-		    	newRegion.populationSt=$('#populationSt').val();
-		    	
-		    	//TODO check data
-		    	
-		    	//TODO submit data
-		    	regionObj.mapRegion = newRegion;
-		    	
-		    	createRegion(regionObj);
-		    	
-		    	//regionTable.bootstrapTable('load', newData);
-		    	
-		    	
-		    	$('#regionEditModal').modal('hide');
-		    	
-			    //刷新表格数据
-			    // regionTable.bootstrapTable('load', data);
-			    
-			    //获取表格数据
-			    //regionTable.bootstrapTable('getData');
-		    });
-		    
-		   //************************* region end *************************/
-		    
-		    
-		  //************************* Icon start *************************/ 
-		  //新增Icon
-		    $('#addIcon').bind('click',function(){
-		    	//onsole.log(regionTable);
-		    	var rows = regionTable.bootstrapTable('getSelections');//获取Table选中的行
-		    	if(rows.length != 1){
-		    		alert('请选择一条记录');
-		    	}
-		    	
-		    	//绑定添加标物事件
-		    	map.addEventListener("click", addMapIcons);
-		    	//显示菜单栏
-		    	$('#mapBar').show();
-		    });
-		    
-		    //编辑Icon
-		    $('#editIcon').bind('click',function(){
-		    	$('#iconEditModal').modal('show');
-		    });
-		    
-		    //提交Icon
-		     $('#iconSubmit').bind('click',function(){
-		    	 submitIcon();
-		    	 tmpIcon = {};
-		    });
-		  //************************* Icon end *************************/
-		    
-	    function drawItem(e){
-	    	//alert(e.point.lng + ", " + e.point.lat);
-	    	//console.log(e.point.lng + ", " + e.point.lat);
-	    	points.push(new BMap.Point(e.point.lng,e.point.lat));
-	    	
-	    	//
-	    	var marker = new BMap.Marker(new BMap.Point(e.point.lng,e.point.lat));
-	    	map.addOverlay(marker); 
-	    	markers.push(marker);
-	    }
+        //加载选择框
+        $('.selectpicker').selectpicker({
+            style: 'btn-info',
+            size: 5
+        });
 
-	    function createPol(map){
-			var polygon = new BMap.Polygon(points,{strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});
-			polygon.setFillColor("FFFFCC");
-			
-			map.addOverlay(polygon);  
-			points=[];
-			for(let i = 0;i<markers.length;i++){
-				map.removeOverlay(markers[i]);
-			}
-			regionObj.mapPoints = convertPoints(markers);
-			//markers=[];
-			stopDraw(map)//关闭地图选点
-		}
+        //日期控件
+        $('#createDate').datepicker({
+            language: "zh-CN",
+            format: 'yyyy-mm-dd'
+        });
 
-		function startDraw(map){
-			map.addEventListener("click", drawItem);
-		}
+        //开启表单验证
+        $("#regionDiaForm").validationEngine({
+            autoHidePrompt: true,
+            autoHideDelay: 2000
+        });
 
-		function stopDraw(map){
-			map.removeEventListener("click", drawItem); //消除事件
-		}
-		
-		function createRegion(regionObj){
-			SysService.doPost(regionObj,SysService.urls.submitRegionUrl,function(res){
-				if(res){
-					//将记录插入Table
-					var tmpObj ={
-		            	"id":res.mapRegion.id,
-		    			"regionName":res.mapRegion.regionName,
-		    			"regionCode":res.mapRegion.regionCode,
-		    			"price":res.mapRegion.price,
-		    			"levelSt":res.mapRegion.levelSt
-		    			};
-					regionTable.bootstrapTable('insertRow', {index: 0, row: tmpObj});//将记录插入到表格第一行
-					//提示成功
-					Mes.show('保存成功');
-					//清除临时数据
-					cleanTempData();
-				}
-			});
-		}
-		
-		function cleanTempData(){
-			//清除数据
-	    	markers=[];
-	    	regionObj={};
-	    	points=[];
-		}
-		
-		function convertPoints(itemsArr){
-			var resultArr = [];
-			for(let i =0 ; i< itemsArr.length;i++){
-				var tmpPoint = {};
-				tmpPoint.lng = itemsArr[i].point.lng;
-				tmpPoint.lat = itemsArr[i].point.lat;
-				tmpPoint.mapOrder = i+1;
-				tmpPoint.typeSt = 'REGION';
-				resultArr.push(tmpPoint);
-			}
-			return resultArr;
-		}
-		
-		function addMapIcons(e){
-			tmpIcon = {};
-			//console.log(e.point.lng + ", " + e.point.lat);
-	    	
-	    	//地图上描绘该点
-	    	var marker = new BMap.Marker(new BMap.Point(e.point.lng,e.point.lat));
-	    	map.addOverlay(marker);
-	    	
-	    	var tmpPoint = {};
-			tmpPoint.lng = e.point.lng;
-			tmpPoint.lat = e.point.lat;
-			
-	    	tmpIcon.point = tmpPoint;
-	    	
-	    	console.log(regionTable.bootstrapTable('getSelections'));
-	    	
-	    	tmpIcon.regionId = regionTable.bootstrapTable('getSelections').id;
-	    	
+        //************************* plugin end *************************/
 
-		}
-		
-		function submitIcon(){
-			
-		}
-		
-		});
+        //************************* map start *************************/
+        //百度地图API功能
+        var map = new BMap.Map("regionManagerMap", {enableMapClick: false});
+        map.addControl(new BMap.NavigationControl());// 添加平移缩放控件
+        map.addControl(new BMap.ScaleControl()); // 添加比例尺控件
+        map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
+        map.enableScrollWheelZoom();   //启用滚轮放大缩小
+        map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+
+        map.setMapStyle({style: 'midnight'});//风格 深蓝
+        //map.setMapStyle({style:'light'}); //淡蓝
+
+        var point = new BMap.Point(120.33, 31.61);
+        map.centerAndZoom(point, 15);
+
+        //创建地图标物
+        var pt = new BMap.Point(120.33, 31.61);
+        var myIcon = new BMap.Icon("/biApp/css/map/mapIcon1.png", new BMap.Size(37, 37), {'imageOffset': new BMap.Size(-291, 0)});
+        var marker2 = new BMap.Marker(pt, {icon: myIcon});  // 创建标注
+
+        marker2.addEventListener("click", attribute);
+
+        map.addOverlay(marker2);              // 将标注添加到地图中
+
+        function attribute() {
+            var p = marker2.getPosition();  //获取marker的位置
+            alert("位置是" + p.lng + "," + p.lat);
+        }
+
+        //************************* region start *************************/
+        //1.初始化Table
+        var regionColumns = [{
+            checkbox: true
+        }, {
+            field: 'regionName',
+            title: '区域名称'
+        }, {
+            field: 'regionCode',
+            title: '区域码'
+        }, {
+            field: 'levelSt',
+            title: '成熟度',
+            formatter: function (text) {
+                return switchRegionSt(text);
+            }
+        }, {
+            field: 'price',
+            title: '均价'
+        }];
+        var regionTable;
+        var TableInit = function () {
+            var oTableInit = new Object();
+            oTableInit.Init = function () {
+                regionTable = $('#tb_departments').bootstrapTable({
+                    url: '/biApp/region/list.do',         //请求后台的URL（*）
+                    method: 'post',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: false,                     //是否启用排序
+                    sortOrder: "asc",                   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 5,                       //每页的记录行数（*）
+                    pageList: [5, 10, 15],        //可供选择的每页的行数（*）
+                    search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                    strictSearch: false,
+                    showColumns: false,                  //是否显示所有的列
+                    showRefresh: false,                  //是否显示刷新按钮
+                    minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    height: 450,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                    showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
+                    cardView: false,                    //是否显示详细视图
+                    detailView: false,                   //是否显示父子表
+                    columns: regionColumns
+                });
+            };
+            oTableInit.queryParams = function (params) {
+                var temp = {
+                    pageSize: params.pageSize,
+                    pageNumber: params.pageNumber
+                };
+                return temp;
+            };
+            return oTableInit;
+        }().Init();
+
+        //2.选点开始
+        $('#btn_add').bind('click', function () {
+            //绑定地图选点
+            map.addEventListener("click", drawItem);
+
+            cleanTempData();
+            //显示功能栏
+            $('#mapBar').show();
+        });
+
+        //3.选点结束
+        var flag = false;
+        $('#closeDraw').bind('click', function () {
+            if (markers.length > 0) {
+                createPol(map);
+                flag = true;
+            } else {
+                Mes.show("请先选点");
+            }
+        });
+
+        //4.编辑
+        $('#btn_edit').click(function () {
+            $("#regionDiaForm")[0].reset();
+            //加载一些select
+            dict('levelSt', 'LEVEL_TYPE');//成熟度
+            dict('populationSt', 'POP_TYPE');//人口密度
+            if (markers.length > 0 && flag) {
+                $("#regionEditModal").modal();
+            } else {
+                Mes.show("请先通过选点画区域");
+            }
+        });
+
+        //5.提交
+        $('#regionSubmit').bind('click', function () {
+            var newRegion = {};
+            if ($("#regionDiaForm").validationEngine('validate')) {
+                newRegion.regionName = $('#regionName').val();
+                newRegion.regionCode = $('#regionCode').val();
+                newRegion.createDate = $('#createDate').val();
+                newRegion.price = $('#price').val();
+                newRegion.topPrice = $('#topPrice').val();
+                newRegion.levelSt = $('#levelSt').val();
+                newRegion.populationSt = $('#populationSt').val();
+
+                regionObj.mapRegion = newRegion;
+
+                createRegion(regionObj);
+
+                $('#regionEditModal').modal('hide');
+
+                //刷新表格数据
+                regionTable.bootstrapTable('refresh');
+
+                //获取表格数据
+                //regionTable.bootstrapTable('getData');
+            }
+        });
+
+        function createRegion(regionObj) {
+            SysService.doPost(regionObj, SysService.urls.submitRegionUrl, function (res) {
+                if (res) {
+                    /*//将记录插入Table
+                    var tmpObj = {
+                        "id": res.mapRegion.id,
+                        "regionName": res.mapRegion.regionName,
+                        "regionCode": res.mapRegion.regionCode,
+                        "price": res.mapRegion.price,
+                        "levelSt": res.mapRegion.levelSt
+                    };
+                    regionTable.bootstrapTable('insertRow', {index: 0, row: tmpObj});//将记录插入到表格第一行*/
+                    //提示成功
+                    Mes.show('保存成功');
+                    //清除临时数据
+                    cleanTempData();
+                }
+            });
+        }
+
+        //************************* region end *************************/
+
+        //************************* Icon start *************************/
+        //新增Icon
+        $('#addIcon').bind('click', function () {
+            var rows = regionTable.bootstrapTable('getSelections');//获取Table选中的行
+            if (rows.length != 1) {
+                Mes.show('请选择一条记录');
+            } else {
+                $('#iconEditModal').modal('show');
+                dict('iconSt', 'ICON_BW_TYPE');//标物类型
+                dict('realEstateSt', 'ICON_WY_TYPE');//物业类型
+                dict('apartmentSt', 'ICON_GY_TYPE');//公寓类型
+            }
+            //绑定添加标物事件
+            map.addEventListener("click", addMapIcons);
+            //显示菜单栏
+            $('#mapBar').show();
+        });
+
+        //编辑Icon
+        $('#editIcon').bind('click', function () {
+            $('#iconEditModal').modal('show');
+        });
+
+        //提交Icon
+        $('#iconSubmit').bind('click', function () {
+            submitIcon();
+            tmpIcon = {};
+        });
+
+        //************************* Icon end *************************/
+
+        function drawItem(e) {
+            //alert(e.point.lng + ", " + e.point.lat);
+            //console.log(e.point.lng + ", " + e.point.lat);
+            points.push(new BMap.Point(e.point.lng, e.point.lat));
+
+            //
+            var marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat));
+            map.addOverlay(marker);
+            markers.push(marker);
+        }
+
+        function createPol(map) {
+            var polygon = new BMap.Polygon(points, {strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5});
+            polygon.setFillColor("FFFFCC");
+
+            map.addOverlay(polygon);
+            points = [];
+            for (let i = 0; i < markers.length; i++) {
+                map.removeOverlay(markers[i]);
+            }
+            regionObj.mapPoints = convertPoints(markers);
+            //markers=[];
+            stopDraw(map)//关闭地图选点
+        }
+
+        function startDraw(map) {
+            map.addEventListener("click", drawItem);
+        }
+
+        function stopDraw(map) {
+            map.removeEventListener("click", drawItem); //消除事件
+        }
+
+        function cleanTempData() {
+            //清除数据
+            markers = [];
+            regionObj = {};
+            points = [];
+        }
+
+        function convertPoints(itemsArr) {
+            var resultArr = [];
+            for (let i = 0; i < itemsArr.length; i++) {
+                var tmpPoint = {};
+                tmpPoint.lng = itemsArr[i].point.lng;
+                tmpPoint.lat = itemsArr[i].point.lat;
+                tmpPoint.mapOrder = i + 1;
+                tmpPoint.typeSt = 'REGION';
+                resultArr.push(tmpPoint);
+            }
+            return resultArr;
+        }
+
+        function addMapIcons(e) {
+            tmpIcon = {};
+            //console.log(e.point.lng + ", " + e.point.lat);
+
+            //地图上描绘该点
+            var marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat));
+            map.addOverlay(marker);
+
+            var tmpPoint = {};
+            tmpPoint.lng = e.point.lng;
+            tmpPoint.lat = e.point.lat;
+
+            tmpIcon.point = tmpPoint;
+
+            console.log(regionTable.bootstrapTable('getSelections'));
+
+            tmpIcon.regionId = regionTable.bootstrapTable('getSelections').id;
+
+
+        }
+
+        function submitIcon() {
+            Mes.show("hello world");
+        }
+
+
+        /* var ButtonInit = function () {
+            var oInit = new Object();
+            var postdata = {};
+
+            oInit.Init = function () {
+            };
+
+            return oInit;
+        }().Init(); */
+
+
+    });
 </script>
 </html>
 
